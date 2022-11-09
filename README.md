@@ -1,1 +1,1 @@
-Serveri käynnistetään ajamalla komento npm run devStart
+- Serveri käynnistetään ajamalla komento npm run devStart
