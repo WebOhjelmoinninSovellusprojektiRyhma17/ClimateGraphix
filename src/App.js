@@ -1,19 +1,14 @@
 import './App.css';
-import NavBar from './components/NavBar';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import NotFound from './components/pages/NotFound';
-import Login from './components/pages/Login';
-import N1 from './components/pages/N1';
-import N2 from './components/pages/N2';
-import N3 from './components/pages/N3';
+import NotFound from "./pages/NotFound";
+import N1 from "./pages/N1";
+import N2 from "./pages/N2";
+import N3 from "./pages/N3";
+import Login from "./pages/Login";
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
     return (
         <>
-            <NavBar />
-            <Header />
             <div>
                 <Routes>
                     <Route path="/" element={<N1 />} />
@@ -23,7 +18,6 @@ function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
-            <Footer />
         </>
     )
 }
