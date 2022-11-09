@@ -1,5 +1,10 @@
+import NavBar from "../NavBar";
+
 export default function Login() {
     return (
-        <p>Login page</p>
+        <>
+            <NavBar />
+            <p>Login page</p>
+        </>
     )
 }
