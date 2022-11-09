@@ -1,7 +1,11 @@
 import React from "react";
+import NavBar from "../NavBar";
 
 export default function N2() {
     return (
-        <p>N2 page</p>
+        <>
+            <NavBar />
+            <p>N2 page</p>
+        </>
     )
 }

@@ -1,5 +1,10 @@
+import NavBar from "../NavBar";
+
 export default function N3() {
     return (
-        <p>N3 page</p>
+        <>
+            <NavBar />
+            <p>N3 page</p>
+        </>
     )
 }

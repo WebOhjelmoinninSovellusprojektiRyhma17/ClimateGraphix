@@ -1,9 +1,13 @@
 import React from "react";
+import NavBar from "../NavBar";
+import Header from "../Header"
 
 export default function N1() {
     return (
-        <div>
-            This is N1 page
-        </div>
+        <>
+            <NavBar />
+            <Header />
+            <p>N1 page</p>
+        </>
     )
 }
