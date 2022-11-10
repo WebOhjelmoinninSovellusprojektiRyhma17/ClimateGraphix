@@ -3,7 +3,7 @@ import axios from 'axios';
 import NavBar from "../NavBar";
 
 export default function SignUp() {
-    //const axios = require('axios').default;
+    //Muuttujat  johon tallennetaan username ja password
     const [username, setusername] = useState(null);
     const [password, setPassword] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState(null);
@@ -23,6 +23,7 @@ export default function SignUp() {
 
     }
 
+    //Kun painetaan rekisteröidy niin lähetetään post
     const handleSubmit = () => {
         console.log(username,password,confirmPassword);
         axios.post('http://localhost:3001/users', {
@@ -38,6 +39,7 @@ export default function SignUp() {
           
     }
 
+    //Palautetaan form jossa on signup ikkuna
     return (
         <>
             <NavBar />
