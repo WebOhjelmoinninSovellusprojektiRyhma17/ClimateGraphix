@@ -7,17 +7,14 @@ import axios from "axios";
 export default function V1() {
     const [globalA, setGlobalA] = useState([]);
 
-    let time = [];
-    let anomaly = [];
-    let lowConfLimit = [];
-    let upConfLimit = [];
+    const URL = 'http://localhost:3001/'
 
     const getGlobalData = () => {
-        axios.get("localhost:3001/global")
+        axios.get(`${URL}global`) 
             .then((response) => {
                 const GlobalAData = response.data.global.GlobalAData;
                 setGlobalA(GlobalAData);
-            }) .catch(error =>
+            }).catch(error =>
                 console.error(`Error: ${error}`));
     }
 
@@ -28,11 +25,11 @@ export default function V1() {
     const data = {
         datasets: [
             {
-                label: "Years",
+                label: "Temperature Anomalies from 1850",
                 data: globalA,
                 borderColor: "rgb(255, 99, 132)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
-                yAxisID: "anomaly",
+                yAxisID: "Anomaly",
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly",
@@ -54,7 +51,7 @@ export default function V1() {
             },
         },
         scales: {
-            anomaly: {
+            Anomaly: {
                 type: "linear",
                 display: true,
                 position: "right",
@@ -63,7 +60,7 @@ export default function V1() {
     };
 
     return (
-        <div style={{ width: "1000px" }}>
+        <div style={{ width: "50%" }}>
             <h1>Here text describing the chart</h1>
             <Line options={options} data={data} />
         </div>

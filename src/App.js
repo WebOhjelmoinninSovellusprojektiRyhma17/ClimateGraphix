@@ -4,9 +4,6 @@ import Login from './components/pages/Login';
 import N1 from './components/pages/N1';
 import N2 from './components/pages/N2';
 import N3 from './components/pages/N3';
-
-import V1 from './components/charts/V1';
-
 import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
 
@@ -18,7 +15,6 @@ function App() {
                     <Route path="/" element={<N1 />} />
                     <Route path="/N2" element={<N2 />} />
                     <Route path="/N3" element={<N3 />} />
-                    <Route path="/V1" element={<V1 />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
