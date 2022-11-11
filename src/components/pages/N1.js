@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../NavBar";
-import Header from "../Header"
+import Header from "../Header";
 
 export default function N1() {
     return (

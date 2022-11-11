@@ -21,6 +21,9 @@ export default function Navbar() {
                             <Link className="nav-link" to="/N3">N3</Link>
                         </li>
                         <li class="nav-item">
+                            <Link className="nav-link" to="/V1">V1</Link>
+                        </li>
+                        <li class="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>
                         </li>
                     </ul>
