@@ -43,3 +43,37 @@ footer div.flex-container {
   padding-top: 15%;
   text-align: center;
 }
+
+.signup {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.message {
+  text-align: center;
+  color:rgb(48, 152, 41)
+}
+
+.signup input {
+  display: block;
+  width: 20rem;
+  height: 2rem;
+  padding: 1rem;
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.signup button {
+  border: none;
+  padding: 1rem;
+  width: 20rem;
+  font-size: 1em;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.signup button:hover {
+  background-color: #c5c5c5;
+}
