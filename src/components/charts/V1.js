@@ -8,16 +8,19 @@ export default function V1() {
     const [globalA, setGlobalA] = useState([]);
 
     const URL = 'http://localhost:3001/'
+    
 
+    // Hakee tiedot tietokannasta
     const getGlobalData = () => {
         axios.get(`${URL}global`) 
             .then((response) => {
-                const GlobalAData = response.data.global.GlobalAData;
-                setGlobalA(GlobalAData);
+                //const GlobalAData = response.data.global.GlobalAData;
+                setGlobalA(response.data);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
 
+    // Kutsuu getGlobalData funktiota aina, kun sivu ladataan
     useEffect(() => {
         getGlobalData();
     }, []);
@@ -25,7 +28,7 @@ export default function V1() {
     const data = {
         datasets: [
             {
-                label: "Temperature Anomalies from 1850",
+                label: "Global Annually",
                 data: globalA,
                 borderColor: "rgb(255, 99, 132)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -61,7 +64,7 @@ export default function V1() {
 
     return (
         <div style={{ width: "50%" }}>
-            <h1>Here text describing the chart</h1>
+            <h1>Temperature Anomalies from 1850</h1>
             <Line options={options} data={data} />
         </div>
     );
