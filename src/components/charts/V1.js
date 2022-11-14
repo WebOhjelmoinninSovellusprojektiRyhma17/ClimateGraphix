@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function V1() {
     const [globalA, setGlobalA] = useState([]);
+    const [globalM, setGlobalM] = useState([]);
 
     const URL = 'http://localhost:3001/'
     
@@ -14,15 +15,24 @@ export default function V1() {
     const getGlobalData = () => {
         axios.get(`${URL}global`) 
             .then((response) => {
-                //const GlobalAData = response.data.global.GlobalAData;
                 setGlobalA(response.data);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
 
-    // Kutsuu getGlobalData funktiota aina, kun sivu ladataan
+    const getGlobalMData = () => {
+        axios.get(`${URL}monthly`) 
+            .then((response) => {
+                setGlobalM(response.data);
+                console.log(globalM);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    // Kutsuu funktiota aina, kun sivu ladataan
     useEffect(() => {
         getGlobalData();
+        getGlobalMData();
     }, []);
 
     const data = {
@@ -39,6 +49,19 @@ export default function V1() {
                 },
                 pointRadius: 1,
             },
+            {
+                label: "Global Monthly",
+                data: globalM,
+                borderColor: "rgb(223, 67, 132)",
+                backgroundColor: "rgba(244, 70, 132, 0.5)",
+                yAxisID: "Anomaly",
+                parsing: {
+                    xAxisKey: "Time",
+                    yAxisKey: "Anomaly",
+                },
+                pointRadius: 1,
+
+            }
         ],
     };
 

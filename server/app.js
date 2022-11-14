@@ -8,6 +8,7 @@ var cors = require('cors');
 //Jokaiselle routes tiedostolle oma
 var usersRouter = require('./routes/users');
 var globalRouter = require('./routes/global');
+var globalMonthlyRouter = require('./routes/globalM');
 
 var app = express();
 app.use(cors());
@@ -22,5 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
 app.use('/global', globalRouter);
+app.use('/monthly', globalMonthlyRouter);
 
 module.exports = app;
