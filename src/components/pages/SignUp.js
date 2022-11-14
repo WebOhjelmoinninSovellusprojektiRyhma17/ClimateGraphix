@@ -2,24 +2,34 @@
 import React, { useState } from 'react';
 import NavBar from "../NavBar";
 
+
+
 export default function SignUp() {
     //Muuttujat, joihin tallennetaan username ja password sekä message, joka tulostuu, kun nappia painetaan
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-
+    var [username, setUsername] = useState("");
+    var [password, setPassword] = useState("");
+    var [message, setMessage] = useState("");
+   
     //Kun painetaan rekisteröidy niin lähetetään post
     let handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            //POST palvelimelle jotta saadaan käyttäjätunnukset tietokantaan.
             let res = await fetch("http://localhost:3001/users", {
-                method: "POST",
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                }),
+                method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            })
             });
+            //Ottaa vastauksen ja esittää sen konsolissa.
             let resJson = await res.json();
+            console.log(resJson);
+
             if (res.status === 200) {
                 setUsername("");
                 setPassword("");
@@ -31,6 +41,7 @@ export default function SignUp() {
             console.log(err);
         }
     };
+    
 
     //Palautetaan form jossa on signup ikkuna
     return (
