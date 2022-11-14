@@ -1,13 +1,14 @@
 import React from "react";
 import NavBar from "../NavBar";
 import Header from "../Header"
+import V1 from "../charts/V1";
 
 export default function N1() {
     return (
         <>
             <NavBar />
             <Header />
-            <p>N1 page</p>
+            <V1 />
         </>
     )
 }
