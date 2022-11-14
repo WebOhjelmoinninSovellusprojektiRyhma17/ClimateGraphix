@@ -1,68 +1,54 @@
-import React, {useState,setState} from 'react';
-import axios from 'axios';
+//import axios from 'axios';
+import React, { useState } from 'react';
 import NavBar from "../NavBar";
 
 export default function SignUp() {
-    //Muuttujat  johon tallennetaan username ja password
-    const [username, setusername] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [confirmPassword, setConfirmPassword] = useState(null);
-
-    
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        if (id === "username") {
-            setusername(value);
-        }
-        if (id === "password") {
-            setPassword(value);
-        }
-        if (id === "confirmPassword") {
-            setConfirmPassword(value);
-        }
-
-    }
+    //Muuttujat, joihin tallennetaan username ja password sekä message, joka tulostuu, kun nappia painetaan
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
     //Kun painetaan rekisteröidy niin lähetetään post
-    const handleSubmit = () => {
-        console.log(username,password,confirmPassword);
-        axios.post('http://localhost:3001/users', {
-            Username: username,
-            Password: password
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          
-    }
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let res = await fetch("http://localhost:3001/users", {
+                method: "POST",
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            });
+            let resJson = await res.json();
+            if (res.status === 200) {
+                setUsername("");
+                setPassword("");
+                setMessage("User created successfully");
+            } else {
+                setMessage("Some error occured");
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     //Palautetaan form jossa on signup ikkuna
     return (
         <>
             <NavBar />
-            <div className="form">
-                <div className="form-body">
-                    <div className="username">
-                        <label className="form__label" for="username">First Name </label>
-                        <input className="form__input" type="text" value={username} onChange={(e) => handleInputChange(e)} id="username" placeholder="First Name" />
+            <div className="signup">
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <input type="text" value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
                     </div>
-
-                    <div className="password">
-                        <label className="form__label" for="password">Password </label>
-                        <input className="form__input" type="password" id="password" value={password} onChange={(e) => handleInputChange(e)} placeholder="Password" />
+                    <div>
+                        <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
-
-                    <div className="confirm-password">
-                        <label className="form__label" for="confirmPassword">Confirm Password </label>
-                        <input className="form__input" type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => handleInputChange(e)} placeholder="Confirm Password" />
+                    <button>Create user</button>
+                    <div className="message">
+                        {message ? <p>{message}</p> : null}
                     </div>
-                </div>
-                <div class="footer">
-                    <button onClick={() => handleSubmit()} type="submit" class="btn">Register</button>
-                </div>
+                </form>
             </div>
         </>
     )
