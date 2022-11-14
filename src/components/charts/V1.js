@@ -59,6 +59,11 @@ export default function V1() {
                 display: true,
                 position: "right",
             },
+            Time: {
+                type: "linear",
+                display: true,
+                position: "bottom",
+            }
         },
     };
 

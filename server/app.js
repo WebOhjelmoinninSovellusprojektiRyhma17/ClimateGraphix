@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
 var cors = require('cors');
-var helmet = require('helmet');
 
 //Jokaiselle routes tiedostolle oma
 var usersRouter = require('./routes/users');
@@ -12,7 +11,6 @@ var globalRouter = require('./routes/global');
 
 var app = express();
 app.use(cors());
-app.use(helmet());
 
 app.use(logger('dev'));
 app.use(express.json());
