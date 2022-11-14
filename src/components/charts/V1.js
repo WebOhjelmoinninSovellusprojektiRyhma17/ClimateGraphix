@@ -7,6 +7,10 @@ import axios from "axios";
 export default function V1() {
     const [globalA, setGlobalA] = useState([]);
     const [globalM, setGlobalM] = useState([]);
+    const [northA, setNorthA] = useState([]);
+    const [northM, setNorthM] = useState([]);
+    const [southA, setSouthA] = useState([]);
+    const [southB, setSouthB] = useState([]);
 
     const URL = 'http://localhost:3001/'
     
@@ -20,8 +24,8 @@ export default function V1() {
                 console.error(`Error: ${error}`));
     }
 
-    const getGlobalMData = () => {
-        axios.get(`${URL}monthly`) 
+    const getGlobalMonthlyData = () => {
+        axios.get(`${URL}globalmonthly`) 
             .then((response) => {
                 setGlobalM(response.data);
                 console.log(globalM);
@@ -29,16 +33,36 @@ export default function V1() {
                 console.error(`Error: ${error}`));
     }
 
+    const getNorthernData = () => {
+        axios.get(`${URL}northern`) 
+            .then((response) => {
+                setNorthA(response.data);
+                console.log(northA);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getNorthernMonthlyData = () => {
+        axios.get(`${URL}gnorthernmonthly`) 
+            .then((response) => {
+                setNorthM(response.data);
+                console.log(northM);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     // Kutsuu funktiota aina, kun sivu ladataan
     useEffect(() => {
         getGlobalData();
-        getGlobalMData();
+        getGlobalMonthlyData();
+        getNorthernData();
+        getNorthernMonthlyData();
     }, []);
 
     const data = {
         datasets: [
             {
-                label: "Global Annually",
+                label: "Global Annual",
                 data: globalA,
                 borderColor: "rgb(255, 99, 132)",
                 backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -53,15 +77,67 @@ export default function V1() {
                 label: "Global Monthly",
                 data: globalM,
                 borderColor: "rgb(223, 67, 132)",
-                backgroundColor: "rgba(244, 70, 132, 0.5)",
+                backgroundColor: "rgba(223, 67, 132, 0.5)",
                 yAxisID: "Anomaly",
                 parsing: {
-                    xAxisKey: "Time",
+                    xAxisKey: "time",
                     yAxisKey: "Anomaly",
                 },
                 pointRadius: 1,
 
-            }
+            },
+            {
+                label: "Northern Annual",
+                data: northA,
+                borderColor: "rgb(666, 20, 15)",
+                backgroundColor: "rgba(666, 20, 15, 0.5)",
+                yAxisID: "Anomaly",
+                parsing: {
+                    xAxisKey: "time",
+                    yAxisKey: "Anomaly",
+                },
+                pointRadius: 1,
+
+            },
+            {
+                label: "Northern Monthly",
+                data: northM,
+                borderColor: "rgb(100, 50, 150)",
+                backgroundColor: "rgba(100, 50, 150, 0.5)",
+                yAxisID: "Anomaly",
+                parsing: {
+                    xAxisKey: "time",
+                    yAxisKey: "Anomaly",
+                },
+                pointRadius: 1,
+
+            },
+            {
+                label: "Southern Annual",
+                data: southA,
+                borderColor: "rgb(10, 30, 200)",
+                backgroundColor: "rgba(10, 30, 200, 0.5)",
+                yAxisID: "Anomaly",
+                parsing: {
+                    xAxisKey: "time",
+                    yAxisKey: "Anomaly",
+                },
+                pointRadius: 1,
+
+            },
+            {
+                label: "Southern Monthly",
+                data: southB,
+                borderColor: "rgb(20, 90, 10)",
+                backgroundColor: "rgba(20, 90, 10, 0.5)",
+                yAxisID: "Anomaly",
+                parsing: {
+                    xAxisKey: "time",
+                    yAxisKey: "Anomaly",
+                },
+                pointRadius: 1,
+
+            },
         ],
     };
 
@@ -77,16 +153,16 @@ export default function V1() {
             },
         },
         scales: {
-            Anomaly: {
+            x: {
+                type: "linear",
+                display: true,
+                position: "bottom",
+            },
+            y: {
                 type: "linear",
                 display: true,
                 position: "right",
             },
-            Time: {
-                type: "linear",
-                display: true,
-                position: "bottom",
-            }
         },
     };
 

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const globalMonthly = require('../models/globalM_model');
+const northernhemi = require('../models/northernhemisphere_model');
 
 router.get('/',
  function(request, response) {
   if (request.params.Time) {
-    globalMonthly.getById(request.params.Time, function(err, dbResult) {
+    northernhemi.getById(request.params.Time, function(err, dbResult) {
       if (err) {
         response.json(err);
       } else {
@@ -13,7 +13,7 @@ router.get('/',
       }
     });
   } else {
-    globalMonthly.getAll(function(err, dbResult) {
+    northernhemi.getAll(function(err, dbResult) {
       if (err) {
         response.json(err);
       } else {
