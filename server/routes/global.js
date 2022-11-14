@@ -3,14 +3,24 @@ const router = express.Router();
 const globalA = require('../models/global_model');
 
 router.get('/',
- function(response) {
-  globalA.getAll(function(err, dbResult) {
+ function(request, response) {
+  if (request.params.Time) {
+    globalA.getById(request.params.Time, function(err, dbResult) {
       if (err) {
         response.json(err);
       } else {
         response.json(dbResult);
       }
+    });
+  } else {
+    globalA.getAll(function(err, dbResult) {
+      if (err) {
+        response.json(err);
+      } else {
+        response.json(dbResult);
+      }
+    });
   }
-)});
+});
 
 module.exports = router;
