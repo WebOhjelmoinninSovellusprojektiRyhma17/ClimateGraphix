@@ -8,6 +8,7 @@ import axios from "axios";
 export default function V1() {
     const [globalA, setGlobalA] = useState("");
     const [globalM, setGlobalM] = useState("");
+    const [northA, setNorthA] = useState("");
     const [northM, setNorthM] = useState("");
     const [southM, setSouthM] = useState("");
 
@@ -27,6 +28,14 @@ export default function V1() {
         axios.get(`${URL}globalmonthly`)
             .then((response) => {
                 setGlobalM(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getNorthernData = () => {
+        axios.get(`${URL}northern`)
+            .then((response) => {
+                setNorthA(response.data);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -51,6 +60,7 @@ export default function V1() {
     useEffect(() => {
         getGlobalData();
         getGlobalMonthlyData();
+        getNorthernData();
         getNorthernMonthlyData();
         getSouthernMonthlyData();
     }, []);
@@ -59,9 +69,20 @@ export default function V1() {
         datasets: [
             {
                 label: "Global Annual",
-                data: globalA,
-                borderColor: "rgb(255, 153, 204)",
-                backgroundColor: "rgba(255, 153, 204, 0.5)",
+                data: globalA,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(219,112,147)",
+                backgroundColor: "rgba(219,112,147, 0.5)",
+                parsing: {
+                    xAxisKey: "Time",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "Anomaly (deg C)",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Global Monthly",
+                data: globalM,
+                borderColor: "rgb(255,182,193)",
+                backgroundColor: "rgba(255,182,193, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly (deg C)",
@@ -69,10 +90,10 @@ export default function V1() {
                 pointRadius: 1,
             },
             {
-                label: "Global Monthly",
-                data: globalM,
-                borderColor: "rgb(255, 0, 127)",
-                backgroundColor: "rgba(255, 0, 127, 0.5)",
+                label: "Northern Hemisphere Annual",
+                data: northA,
+                borderColor: "rgb(128,128,128)",
+                backgroundColor: "rgba(128,128,128, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly (deg C)",
@@ -82,8 +103,8 @@ export default function V1() {
             {
                 label: "Northern Hemisphere Monthly",
                 data: northM,
-                borderColor: "rgb(0, 153, 153)",
-                backgroundColor: "rgba(0, 153, 153, 0.5)",
+                borderColor: "rgb(192,192,192)",
+                backgroundColor: "rgba(192,192,192, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly (deg C)",
@@ -93,8 +114,8 @@ export default function V1() {
             {
                 label: "Southern Hemisphere Monthly",
                 data: southM,
-                borderColor: "rgb(0, 204, 0)",
-                backgroundColor: "rgba(0, 204, 0, 0.5)",
+                borderColor: "rgb(152,251,152)",
+                backgroundColor: "rgba(152,251,152, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly (deg C)",
@@ -112,7 +133,7 @@ export default function V1() {
             },
             title: {
                 display: true,
-                text: "Visualisation 1",
+                //text: "Visualisation 1",
             },
         },
         scales: {
@@ -130,9 +151,10 @@ export default function V1() {
     };
 
     return (
-        <div style={{ width: "50%" }}>
-            <h1>Temperature Anomalies from 1850</h1>
+        <div style={{ width: "75%" }}>
+            <h2>Temperature Anomalies from 1850</h2>
             <Line options={options} data={data} />
+            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Datasets</a>
         </div>
     );
 }

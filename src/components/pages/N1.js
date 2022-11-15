@@ -7,7 +7,6 @@ export default function N1() {
     return (
         <>
             <NavBar />
-            <Header />
             <V1 />
         </>
     )
