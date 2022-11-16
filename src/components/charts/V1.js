@@ -128,7 +128,7 @@ export default function V1() {
                 backgroundColor: "rgba(0,128,0, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
-                    yAxisKey: "Realization 1",
+                    yAxisKey: "Realization",
                 },
                 pointRadius: 1,
             },
