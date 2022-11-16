@@ -29,6 +29,15 @@ footer div.flex-container {
   min-width: 600px;
 }
 
+a {
+  text-decoration: none;
+  color:#333;
+}
+
+a:hover {
+  color:rgb(0, 0, 0);
+}
+
 #nav {
   margin-bottom: 0!important;
 }
@@ -76,4 +85,9 @@ footer div.flex-container {
 
 .signup button:hover {
   background-color: #c5c5c5;
+}
+
+.V1 {
+  position: relative;
+  margin-bottom: 80px;
 }
