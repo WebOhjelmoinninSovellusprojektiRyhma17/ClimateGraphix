@@ -2,7 +2,7 @@ const db = require('../database');
 
 const user = {
   getById: function(id, callback) {
-    return db.query('select * from user where iduser=?', [id], callback);
+    return db.query('select username,password from user where username=?', [id], callback);
   },
   getAll: function(callback) {
     return db.query('select * from user', callback);
