@@ -151,7 +151,7 @@ export default function V1() {
     };
 
     return (
-        <div style={{ width: "75%" }}>
+        <div className="v1" style={{ width: "75%" }}>
             <h2>Temperature Anomalies from 1850</h2>
             <Line options={options} data={data} />
             <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Datasets</a>
