@@ -10,6 +10,7 @@ export default function V1() {
     const [globalM, setGlobalM] = useState("");
     const [northA, setNorthA] = useState("");
     const [northM, setNorthM] = useState("");
+    const [southA, setSouthA] = useState("");
     const [southM, setSouthM] = useState("");
 
     const URL = 'http://localhost:3001/'
@@ -48,6 +49,14 @@ export default function V1() {
                 console.error(`Error: ${error}`));
     }
 
+    const getSouthernData = () => {
+        axios.get(`${URL}southern`)
+            .then((response) => {
+                setSouthA(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     const getSouthernMonthlyData = () => {
         axios.get(`${URL}southernmonthly`)
             .then((response) => {
@@ -62,6 +71,7 @@ export default function V1() {
         getGlobalMonthlyData();
         getNorthernData();
         getNorthernMonthlyData();
+        getSouthernData();
         getSouthernMonthlyData();
     }, []);
 
@@ -96,7 +106,7 @@ export default function V1() {
                 backgroundColor: "rgba(128,128,128, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
-                    yAxisKey: "Anomaly (deg C)",
+                    yAxisKey: "Realization 1",
                 },
                 pointRadius: 1,
             },
@@ -108,6 +118,17 @@ export default function V1() {
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly (deg C)",
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Southern Hemisphere Annual",
+                data: southA,
+                borderColor: "rgb(0,128,0)",
+                backgroundColor: "rgba(0,128,0, 0.5)",
+                parsing: {
+                    xAxisKey: "Time",
+                    yAxisKey: "Realization 1",
                 },
                 pointRadius: 1,
             },
@@ -151,7 +172,7 @@ export default function V1() {
     };
 
     return (
-        <div className="v1" style={{ width: "75%" }}>
+        <div className="v1" >
             <h2>Temperature Anomalies from 1850</h2>
             <Line options={options} data={data} />
             <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Datasets</a>
