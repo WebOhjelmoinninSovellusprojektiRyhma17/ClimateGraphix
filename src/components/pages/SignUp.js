@@ -9,7 +9,7 @@ export default function SignUp() {
     var [username, setUsername] = useState("");
     var [password, setPassword] = useState("");
     var [message, setMessage] = useState("");
-   
+
     //Kun painetaan rekisteröidy niin lähetetään post
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,14 +17,14 @@ export default function SignUp() {
             //POST palvelimelle jotta saadaan käyttäjätunnukset tietokantaan.
             let res = await fetch("http://localhost:3001/users", {
                 method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            })
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                })
             });
             //Ottaa vastauksen ja esittää sen konsolissa.
             let resJson = await res.json();
@@ -41,7 +41,7 @@ export default function SignUp() {
             console.log(err);
         }
     };
-    
+
 
     //Palautetaan form jossa on signup ikkuna
     return (

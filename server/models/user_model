@@ -14,8 +14,10 @@ const user = {
       callback
     );
   },
+  //käyttäjä poistetaan osoitteesta localhost:3001/users/*
+  //tähden tilalle tulee käyttäjänimi
   delete: function(id, callback) {
-    return db.query('delete from user where iduser=?', [id], callback);
+    return db.query('delete from user where username=?', [id], callback);
   },
   update: function(id, user, callback) {
     return db.query(
