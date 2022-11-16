@@ -13,6 +13,7 @@ var northernMonthlyRouter = require('./routes/northernmonthly');
 var northernRouter = require('./routes/northernhemisphere');
 var southernRouter = require('./routes/southernhemisphere');
 var southernMonthlyRouter = require('./routes/southernmonthly');
+var co2annualRouter = require('./routes/co2annual');
 
 var app = express();
 app.use(cors());
@@ -32,5 +33,6 @@ app.use('/northernmonthly', northernMonthlyRouter);
 app.use('/northern', northernRouter);
 app.use('/southern', southernRouter);
 app.use('/southernmonthly', southernMonthlyRouter);
+app.use('/co2annual', co2annualRouter);
 
 module.exports = app;
