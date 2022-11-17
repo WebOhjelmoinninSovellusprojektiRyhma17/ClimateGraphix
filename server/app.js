@@ -6,6 +6,7 @@ var mysql = require('mysql');
 var cors = require('cors');
 
 //Jokaiselle routes tiedostolle oma
+var vostokRouter = require('./routes/vostok');
 var usersRouter = require('./routes/users');
 var globalRouter = require('./routes/global');
 var globalMonthlyRouter = require('./routes/globalmonthly');
@@ -15,6 +16,7 @@ var southernRouter = require('./routes/southernhemisphere');
 var southernMonthlyRouter = require('./routes/southernmonthly');
 var co2Router = require('./routes/co2annual');
 var co2MonthlyRouter = require('./routes/co2monthly');
+
 
 var app = express();
 app.use(cors());
@@ -28,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
+app.use('/vostok', vostokRouter);
 app.use('/global', globalRouter);
 app.use('/globalmonthly', globalMonthlyRouter);
 app.use('/northernmonthly', northernMonthlyRouter);
@@ -36,5 +39,6 @@ app.use('/southern', southernRouter);
 app.use('/southernmonthly', southernMonthlyRouter);
 app.use('/co2annual', co2Router);
 app.use('/co2monthly', co2MonthlyRouter);
+
 
 module.exports = app;

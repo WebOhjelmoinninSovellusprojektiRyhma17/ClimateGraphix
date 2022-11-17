@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const northM = require('../models/northernmonthly_model');
+const vostok = require('../models/vostok_model');
 
 router.get('/',
 function(request, response) {
-    northM.getAll(function(err, dbResult) {
+    vostok.getAll(function(err, dbResult) {
       if (err) {
         response.json(err);
       } else {

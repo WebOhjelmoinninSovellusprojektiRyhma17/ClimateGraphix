@@ -105,7 +105,7 @@ export default function V1() {
                 backgroundColor: "rgba(128,128,128, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
-                    yAxisKey: "Realization 1",
+                    yAxisKey: "Anomaly (deg C)",
                 },
                 pointRadius: 1,
             },
@@ -127,7 +127,7 @@ export default function V1() {
                 backgroundColor: "rgba(0,128,0, 0.5)",
                 parsing: {
                     xAxisKey: "Time",
-                    yAxisKey: "Realization",
+                    yAxisKey: "Anomaly (deg C)",
                 },
                 pointRadius: 1,
             },
