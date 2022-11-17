@@ -6,6 +6,7 @@ var mysql = require('mysql');
 var cors = require('cors');
 
 //Jokaiselle routes tiedostolle oma
+var vostokRouter = require('./routes/vostok');
 var usersRouter = require('./routes/users');
 var globalRouter = require('./routes/global');
 var globalMonthlyRouter = require('./routes/globalmonthly');
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
+app.use('/vostok', vostokRouter);
 app.use('/global', globalRouter);
 app.use('/globalmonthly', globalMonthlyRouter);
 app.use('/northernmonthly', northernMonthlyRouter);
