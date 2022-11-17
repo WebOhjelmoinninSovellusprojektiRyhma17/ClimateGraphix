@@ -6,7 +6,8 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function V3() {
-    const [co2annual, setco2Annual] = useState("");
+    const [co2annual, setCo2annual] = useState("");
+    const [co2monthly, setCo2monthly] = useState("");
 
     const URL = 'http://localhost:3001/'
 
@@ -14,13 +15,22 @@ export default function V3() {
     const getco2Annual = () => {
         axios.get(`${URL}co2annual`)
             .then((response) => {
-                setco2Annual(response.data);
+                setCo2annual(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getco2Monthly = () => {
+        axios.get(`${URL}co2monthly`)
+            .then((response) => {
+                setCo2monthly(response.data);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
 
     useEffect(() => {
         getco2Annual();
+        getco2Monthly();
     }, []);
 
     const data = {
@@ -28,11 +38,22 @@ export default function V3() {
             {
                 label: "Co2 annual",
                 data: co2annual,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
-                borderColor: "rgb(219,112,147)",
-                backgroundColor: "rgba(219,112,147, 0.5)",
+                borderColor: "rgb(165,42,42)",
+                backgroundColor: "rgba(165,42,42, 0.5)",
                 parsing: {
                     xAxisKey: "year",                               // x-akselin muuttuja tietokannassa
                     yAxisKey: "mean",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Co2 monthly",
+                data: co2monthly,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(255,99,71)",
+                backgroundColor: "rgba(255,99,71, 0.5)",
+                parsing: {
+                    xAxisKey: "decimal date",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "average",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
@@ -52,10 +73,9 @@ export default function V3() {
         },
         scales: {
             x: {
-                type: "time",
-                time: {
-                    unit: "year"
-                }
+                type: "linear",
+                min: 1958,
+                max: 2022,
             },
             y: {
                 type: "linear",
@@ -65,10 +85,11 @@ export default function V3() {
     };
 
     return (
-        <div className="v2" style={{ width: "50%" }} >
+        <div className="v2" style={{ width: "100%" }} >
             <h2>Atmospheric CO2 concentrations from Mauna Loa measurements starting 1958</h2>
             <Line options={options} data={data} />
             <div>
+            <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>
             <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" >Datasource</a>
             </div>
             <div>
