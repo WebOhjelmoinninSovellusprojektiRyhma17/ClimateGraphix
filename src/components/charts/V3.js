@@ -90,10 +90,10 @@ export default function V3() {
             {
                 label: "Ice Core DE08",
                 data: firstData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
-                borderColor: "rgb(165,42,42)",
-                backgroundColor: "rgba(165,42,42, 0.5)",
+                borderColor: "rgb(0,255,127)",
+                backgroundColor: "rgba(0,255,127, 0.5)",
                 parsing: {
-                    xAxisKey: "Analysis",                               // x-akselin muuttuja tietokannassa
+                    xAxisKey: "Mean Air Age",                               // x-akselin muuttuja tietokannassa
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
@@ -101,22 +101,22 @@ export default function V3() {
             {
                 label: "Ice Core DE08-02",
                 data: secondData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
-                borderColor: "rgb(22,22,22)",
-                backgroundColor: "rgba(22,22,22, 0.5)",
+                borderColor: "rgb(0,255,255)",
+                backgroundColor: "rgba(0,255,255, 0.5)",
                 parsing: {
-                    xAxisKey: "Analysis Date",                               // x-akselin muuttuja tietokannassa
-                    yAxisKey: "Mean Ice Depth, m",                    // y-akselin muuttuja tietokannassa
+                    xAxisKey: "Mean Air Age",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
             {
                 label: "Ice Core DSS",
                 data: thirdData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
-                borderColor: "rgb(100,100,100)",
-                backgroundColor: "rgba(100,100,100, 0.5)",
+                borderColor: "rgb(255,215,0)",
+                backgroundColor: "rgba(255,215,0, 0.5)",
                 parsing: {
-                    xAxisKey: "Analysis Date",                               // x-akselin muuttuja tietokannassa
-                    yAxisKey: "Mean Ice Depth, m",                    // y-akselin muuttuja tietokannassa
+                    xAxisKey: "Mean Air Age",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
@@ -150,7 +150,7 @@ export default function V3() {
 
     return (
         <div className="v2" style={{ width: "100%" }} >
-            <h2>Atmospheric CO2 concentrations from Mauna Loa measurements starting 1958</h2>
+            <h2>Mauna Loa CO2 measurements and Ice Core measurements</h2>
             <Line options={options} data={data} />
             <div>
             <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>
@@ -158,6 +158,12 @@ export default function V3() {
             </div>
             <div>
             <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" >Data measurement</a>
+            </div>
+            <div>
+            <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" >Ice Core description</a>
+            </div>
+            <div>
+            <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" >Ice Core dataset</a>
             </div>
         </div>
     );
