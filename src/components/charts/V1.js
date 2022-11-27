@@ -12,6 +12,7 @@ export default function V1() {
     const [northM, setNorthM] = useState("");
     const [southA, setSouthA] = useState("");
     const [southM, setSouthM] = useState("");
+    const [v2, setv2] = useState("");
 
     const URL = 'http://localhost:3001/'
 
@@ -65,6 +66,17 @@ export default function V1() {
                 console.error(`Error: ${error}`));
     }
 
+
+    //V2 kuvaajalle GET pyyntö
+    const getv2Data = () => {
+        axios.get(`${URL}v2`)
+            .then((response) => {
+                console.log(response.data);             //Konsoliin tulee tieto palvelimelta voi tarkastaa tiedon POISTETAAN LOPULTA.
+                setv2(response.data);                   //Asetetaan v2 muuttujaan vastauksen data
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     // Kutsuu funktiota aina, kun sivu ladataan
     useEffect(() => {
         getGlobalData();
@@ -73,6 +85,7 @@ export default function V1() {
         getNorthernMonthlyData();
         getSouthernData();
         getSouthernMonthlyData();
+        getv2Data();                                    //Funktio jolla haetaan tiedot
     }, []);
 
     const data = {
@@ -140,6 +153,17 @@ export default function V1() {
                 parsing: {
                     xAxisKey: "Time",
                     yAxisKey: "Anomaly (deg C)",
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Northern Hemisphere 2,000-year temperature reconstruction",
+                data: v2,
+                borderColor: "rgb(255,000,000)",
+                backgroundColor: "rgba(255,000,000, 0.5)",
+                parsing: {                                                              //Valitaan avain sanat mitkä tiedot otetaan.
+                    xAxisKey: "year",
+                    yAxisKey: "T",
                 },
                 pointRadius: 1,
             },
