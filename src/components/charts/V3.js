@@ -8,6 +8,9 @@ import axios from "axios";
 export default function V3() {
     const [co2annual, setCo2annual] = useState("");
     const [co2monthly, setCo2monthly] = useState("");
+    const [firstData, setFirstData] = useState([]);
+    const [secondData, setSecondData] = useState([]);
+    const [thirdData, setThirdData] = useState([]);
 
     const URL = 'http://localhost:3001/'
 
@@ -28,9 +31,36 @@ export default function V3() {
                 console.error(`Error: ${error}`));
     }
 
+    const getFirstData = () => {
+        axios.get(`${URL}v4eka`)
+            .then((response) => {
+                setFirstData(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getSecondData = () => {
+        axios.get(`${URL}v4toka`)
+            .then((response) => {
+                setSecondData(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getThirdData = () => {
+        axios.get(`${URL}v4kolmas`)
+            .then((response) => {
+                setThirdData(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     useEffect(() => {
         getco2Annual();
         getco2Monthly();
+        getFirstData();
+        getSecondData();
+        getThirdData();
     }, []);
 
     const data = {
@@ -52,8 +82,41 @@ export default function V3() {
                 borderColor: "rgb(255,99,71)",
                 backgroundColor: "rgba(255,99,71, 0.5)",
                 parsing: {
-                    xAxisKey: "decimal date",                               // x-akselin muuttuja tietokannassa
-                    yAxisKey: "average",                    // y-akselin muuttuja tietokannassa
+                    xAxisKey: "date",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "monthly average",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Ice Core DE08",
+                data: firstData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(165,42,42)",
+                backgroundColor: "rgba(165,42,42, 0.5)",
+                parsing: {
+                    xAxisKey: "Analysis",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Ice Core DE08-02",
+                data: secondData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(22,22,22)",
+                backgroundColor: "rgba(22,22,22, 0.5)",
+                parsing: {
+                    xAxisKey: "Analysis Date",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "Mean Ice Depth, m",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Ice Core DSS",
+                data: thirdData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(100,100,100)",
+                backgroundColor: "rgba(100,100,100, 0.5)",
+                parsing: {
+                    xAxisKey: "Analysis Date",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "Mean Ice Depth, m",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
@@ -73,9 +136,10 @@ export default function V3() {
         },
         scales: {
             x: {
-                type: "linear",
-                min: 1958,
-                max: 2022,
+                type: "time",
+                time: {
+                    unit: "month"
+                }
             },
             y: {
                 type: "linear",
