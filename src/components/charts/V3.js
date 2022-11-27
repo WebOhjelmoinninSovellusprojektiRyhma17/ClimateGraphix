@@ -8,6 +8,9 @@ import axios from "axios";
 export default function V3() {
     const [co2annual, setCo2annual] = useState("");
     const [co2monthly, setCo2monthly] = useState("");
+    const [firstData, setFirstData] = useState([]);
+    const [secondData, setSecondData] = useState([]);
+    const [thirdData, setThirdData] = useState([]);
 
     const URL = 'http://localhost:3001/'
 
@@ -28,9 +31,36 @@ export default function V3() {
                 console.error(`Error: ${error}`));
     }
 
+    const getFirstData = () => {
+        axios.get(`${URL}v4eka`)
+            .then((response) => {
+                setFirstData(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getSecondData = () => {
+        axios.get(`${URL}v4toka`)
+            .then((response) => {
+                setSecondData(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getThirdData = () => {
+        axios.get(`${URL}v4kolmas`)
+            .then((response) => {
+                setThirdData(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     useEffect(() => {
         getco2Annual();
         getco2Monthly();
+        getFirstData();
+        getSecondData();
+        getThirdData();
     }, []);
 
     const data = {
@@ -52,8 +82,41 @@ export default function V3() {
                 borderColor: "rgb(255,99,71)",
                 backgroundColor: "rgba(255,99,71, 0.5)",
                 parsing: {
-                    xAxisKey: "decimal date",                               // x-akselin muuttuja tietokannassa
-                    yAxisKey: "average",                    // y-akselin muuttuja tietokannassa
+                    xAxisKey: "date",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "monthly average",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Ice Core DE08",
+                data: firstData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(0,255,127)",
+                backgroundColor: "rgba(0,255,127, 0.5)",
+                parsing: {
+                    xAxisKey: "Mean Air Age",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Ice Core DE08-02",
+                data: secondData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(0,255,255)",
+                backgroundColor: "rgba(0,255,255, 0.5)",
+                parsing: {
+                    xAxisKey: "Mean Air Age",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
+                },
+                pointRadius: 1,
+            },
+            {
+                label: "Ice Core DSS",
+                data: thirdData,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
+                borderColor: "rgb(255,215,0)",
+                backgroundColor: "rgba(255,215,0, 0.5)",
+                parsing: {
+                    xAxisKey: "Mean Air Age",                               // x-akselin muuttuja tietokannassa
+                    yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
@@ -73,9 +136,10 @@ export default function V3() {
         },
         scales: {
             x: {
-                type: "linear",
-                min: 1958,
-                max: 2022,
+                type: "time",
+                time: {
+                    unit: "month"
+                }
             },
             y: {
                 type: "linear",
@@ -86,7 +150,7 @@ export default function V3() {
 
     return (
         <div className="v2" style={{ width: "100%" }} >
-            <h2>Atmospheric CO2 concentrations from Mauna Loa measurements starting 1958</h2>
+            <h2>Mauna Loa CO2 measurements and Ice Core measurements</h2>
             <Line options={options} data={data} />
             <div>
             <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>
@@ -94,6 +158,12 @@ export default function V3() {
             </div>
             <div>
             <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" >Data measurement</a>
+            </div>
+            <div>
+            <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" >Ice Core description</a>
+            </div>
+            <div>
+            <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" >Ice Core dataset</a>
             </div>
         </div>
     );
