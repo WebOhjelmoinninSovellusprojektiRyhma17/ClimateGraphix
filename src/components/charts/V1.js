@@ -16,7 +16,6 @@ export default function V1() {
 
     const URL = 'http://localhost:3001/'
 
-
     // Hakee tiedot tietokannasta
     const getGlobalData = () => {
         axios.get(`${URL}global`)
@@ -30,22 +29,6 @@ export default function V1() {
         axios.get(`${URL}globalmonthly`)
             .then((response) => {
                 setGlobalM(response.data);
-            }).catch(error =>
-                console.error(`Error: ${error}`));
-    }
-
-    const getNorthernData = () => {
-        axios.get(`${URL}northern`)
-            .then((response) => {
-                setNorthA(response.data);
-            }).catch(error =>
-                console.error(`Error: ${error}`));
-    }
-
-    const getNorthernMonthlyData = () => {
-        axios.get(`${URL}northernmonthly`)
-            .then((response) => {
-                setNorthM(response.data);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -66,6 +49,22 @@ export default function V1() {
                 console.error(`Error: ${error}`));
     }
 
+    const getNorthernData = () => {
+        axios.get(`${URL}northern`)
+            .then((response) => {
+                setNorthA(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
+    const getNorthernMonthlyData = () => {
+        axios.get(`${URL}northernmonthly`)
+            .then((response) => {
+                setNorthM(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
 
     //V2 kuvaajalle GET pyyntö
     const getv2Data = () => {
@@ -81,11 +80,11 @@ export default function V1() {
     useEffect(() => {
         getGlobalData();
         getGlobalMonthlyData();
-        getNorthernData();
-        getNorthernMonthlyData();
         getSouthernData();
         getSouthernMonthlyData();
         getv2Data();                                    //Funktio jolla haetaan tiedot
+        getNorthernData();
+        getNorthernMonthlyData();
     }, []);
 
     const data = {

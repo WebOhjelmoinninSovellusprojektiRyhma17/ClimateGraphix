@@ -15,7 +15,12 @@ var northernMonthlyRouter = require('./routes/northernmonthly');
 var northernRouter = require('./routes/northernhemisphere');
 var southernRouter = require('./routes/southernhemisphere');
 var southernMonthlyRouter = require('./routes/southernmonthly');
-var co2annualRouter = require('./routes/co2annual');
+var co2Router = require('./routes/co2annual');
+var co2MonthlyRouter = require('./routes/co2monthly');
+var v4ekaRouter = require('./routes/v4eka');
+var v4tokaRouter = require('./routes/v4toka');
+var v4kolmasRouter = require('./routes/v4kolmas');
+
 
 var app = express();
 app.use(cors());
@@ -37,6 +42,10 @@ app.use('/northernmonthly', northernMonthlyRouter);
 app.use('/northern', northernRouter);
 app.use('/southern', southernRouter);
 app.use('/southernmonthly', southernMonthlyRouter);
-app.use('/co2annual', co2annualRouter);
+app.use('/co2annual', co2Router);
+app.use('/co2monthly', co2MonthlyRouter);
+app.use('/v4eka', v4ekaRouter);
+app.use('/v4toka', v4tokaRouter);
+app.use('/v4kolmas', v4kolmasRouter);
 
 module.exports = app;
