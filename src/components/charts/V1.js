@@ -199,7 +199,8 @@ export default function V1() {
         <div className="v1" >
             <h2>Temperature Anomalies from 1850</h2>
             <Line options={options} data={data} />
-            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Datasets</a>
+            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >V1 Datasets</a><br></br>
+            <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank" >V2 Datasets</a>
         </div>
     );
 }
