@@ -12,6 +12,7 @@ export default function V1() {
     const [northM, setNorthM] = useState("");
     const [southA, setSouthA] = useState("");
     const [southM, setSouthM] = useState("");
+    const [v2, setv2] = useState("");
 
     const URL = 'http://localhost:3001/'
 
@@ -64,12 +65,24 @@ export default function V1() {
                 console.error(`Error: ${error}`));
     }
 
+
+    //V2 kuvaajalle GET pyyntö
+    const getv2Data = () => {
+        axios.get(`${URL}v2`)
+            .then((response) => {
+                console.log(response.data);             //Konsoliin tulee tieto palvelimelta voi tarkastaa tiedon POISTETAAN LOPULTA.
+                setv2(response.data);                   //Asetetaan v2 muuttujaan vastauksen data
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     // Kutsuu funktiota aina, kun sivu ladataan
     useEffect(() => {
         getGlobalData();
         getGlobalMonthlyData();
         getSouthernData();
         getSouthernMonthlyData();
+        getv2Data();                                    //Funktio jolla haetaan tiedot
         getNorthernData();
         getNorthernMonthlyData();
     }, []);
@@ -142,6 +155,17 @@ export default function V1() {
                 },
                 pointRadius: 1,
             },
+            {
+                label: "Northern Hemisphere 2,000-year temperature reconstruction",
+                data: v2,
+                borderColor: "rgb(255,000,000)",
+                backgroundColor: "rgba(255,000,000, 0.5)",
+                parsing: {                                                              //Valitaan avain sanat mitkä tiedot otetaan.
+                    xAxisKey: "year",
+                    yAxisKey: "T",
+                },
+                pointRadius: 1,
+            },
         ],
     };
 
@@ -174,7 +198,8 @@ export default function V1() {
         <div className="v1" >
             <h2>Temperature Anomalies from 1850</h2>
             <Line options={options} data={data} />
-            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Datasets</a>
+            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >V1 Datasets</a><br></br>
+            <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank" >V2 Datasets</a>
         </div>
     );
 }
