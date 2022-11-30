@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js";
-import { getElementAtEvent, Doughnut } from "react-chartjs-2";
-import { InteractionItem } from 'chart.js';
+import { getElementAtEvent, Doughnut, Pie } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import { useState } from "react";
 import axios from "axios";
@@ -14,6 +13,7 @@ export default function V9() {
     const [subsectorfurtherdata, setSubsectorfurtherdata] = useState([]);
 
     const URL = 'http://localhost:3001/'
+    const chartRef = useRef();
 
     // Hakee tiedot tietokannasta
     const getSectorData = () => {
@@ -51,14 +51,12 @@ export default function V9() {
     }, []);
 
     // Ensimmäinen donitsi
-    const data1 = {
-        labels: ["Energy", "Industrial processes", "Waste", "Agriculture, Forestry & Land Use (AFOLU)"],
+    const data = {
         datasets: [
             {
+                labels: ["Energy", "Industrial processes", "Waste", "Agriculture, Forestry & Land Use (AFOLU)"],
                 data: sectorData,
-                options: {
-                    responsive: true,
-                },
+                //borderColor: "rgb(255,182,193)",
                 backgroundColor: [
                     'rgb(128,0,0)',
                     'rgb(255,215,0)',
@@ -68,8 +66,18 @@ export default function V9() {
                 parsing: {
                     key: "emissions"
                 },
+                options: {
+                    responsive: true,
+                    redraw: true,
+                    datasetIdKey: 'eka',
+                },
                 borderWidth: 1,
             },
+            {
+                // testidata
+                labels: ["eka", "toka", "kolmas", "neljas"],
+                data: [20, 15, 30, 35],
+            }
         ],
     };
 
@@ -103,6 +111,10 @@ export default function V9() {
                 parsing: {
                     key: "Share of global greenhouse gas emissions (%)"
                 },
+                options: {
+                    redraw: true,
+                    datasetIdKey: 'toinen',
+                },
                 borderWidth: 1,
             }
         ]
@@ -129,28 +141,38 @@ export default function V9() {
         ],
     };
 
-    const chartRef = useRef();
-
-    const printElementAtEvent = (element) => {
-        if (!element.length) return;
-    
-        const { datasetIndex, index } = element[0];
-    
-        console.log(data1.labels[index], data1.datasets[datasetIndex].data[index]);
-      };
-
+    // Funktio, joka ajetaan aina klikatessa
     const onClick = (event) => {
-        console.log(getElementAtEvent(chartRef.current, event));
-        printElementAtEvent(getElementAtEvent(chartRef.current, event));
+        
+        const chart = chartRef.current;                             // Klikattu chartti
+        const element = (getElementAtEvent(chart, event));          // Klikatun sektorin data muuttujaan
+        const { datasetIndex, index } = element[0];                 // Eritellään indeksi ja datasetin indeksi sektorista
+
+
+        // if else, jonka pitäsi joskus tulostaa uusi chartti tiettyä sektoria klikattaessa
+        if(index == 0) {
+            console.log("ensimmäinen sektori");
+            data.datasets.push(data2);
+            chart.update();
+        } else if(index == 1) {
+            console.log("toinen sektori");
+        } else if(index == 2) {
+            console.log("kolmas sektori");
+        } else if(index == 3) {
+            console.log("neljäs sektori");
+        }
+
+        console.log(element);
     }
 
     // Määritellään, mitä palautetaan.
     return (
         <div className="V9">
             <h2>CO2 emissions by sectors</h2>
-            <Doughnut
+            <Pie
+                id="eka"
                 ref={chartRef}
-                data={data1}
+                data={data}
                 onClick={onClick}
             />
         </div>
