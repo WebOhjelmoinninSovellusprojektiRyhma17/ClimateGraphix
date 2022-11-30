@@ -20,7 +20,9 @@ var co2MonthlyRouter = require('./routes/co2monthly');
 var v4ekaRouter = require('./routes/v4eka');
 var v4tokaRouter = require('./routes/v4toka');
 var v4kolmasRouter = require('./routes/v4kolmas');
-
+var sectorRouter = require('./routes/sector');
+var subsectorRouter = require('./routes/subsector');
+var subsectorfurtherRouter = require('./routes/subsectorfurther');
 
 var app = express();
 app.use(cors());
@@ -47,5 +49,8 @@ app.use('/co2monthly', co2MonthlyRouter);
 app.use('/v4eka', v4ekaRouter);
 app.use('/v4toka', v4tokaRouter);
 app.use('/v4kolmas', v4kolmasRouter);
+app.use('/sector', sectorRouter);
+app.use('/subsector', subsectorRouter);
+app.use('/subsectorfurther', subsectorfurtherRouter);
 
 module.exports = app;
