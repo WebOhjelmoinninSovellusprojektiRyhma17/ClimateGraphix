@@ -158,6 +158,7 @@ export default function V1() {
             {
                 label: "Northern Hemisphere 2,000-year temperature reconstruction",
                 data: v2,
+                hidden: true,
                 borderColor: "rgb(255,000,000)",
                 backgroundColor: "rgba(255,000,000, 0.5)",
                 parsing: {                                                              //Valitaan avain sanat mitkä tiedot otetaan.
