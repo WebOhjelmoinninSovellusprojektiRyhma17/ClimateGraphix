@@ -1,28 +1,30 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mysql = require('mysql');
-var cors = require('cors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mysql = require('mysql');
+const cors = require('cors');
 
 //Jokaiselle routes tiedostolle oma
-var vostokRouter = require('./routes/vostok');
-var v2Router = require('./routes/v2');
-var usersRouter = require('./routes/users');
-var globalRouter = require('./routes/global');
-var globalMonthlyRouter = require('./routes/globalmonthly');
-var northernMonthlyRouter = require('./routes/northernmonthly');
-var northernRouter = require('./routes/northernhemisphere');
-var southernRouter = require('./routes/southernhemisphere');
-var southernMonthlyRouter = require('./routes/southernmonthly');
-var co2Router = require('./routes/co2annual');
-var co2MonthlyRouter = require('./routes/co2monthly');
-var v4ekaRouter = require('./routes/v4eka');
-var v4tokaRouter = require('./routes/v4toka');
-var v4kolmasRouter = require('./routes/v4kolmas');
+const vostokRouter = require('./routes/vostok');
+const v2Router = require('./routes/v2');
+const v71Router = require('./routes/v71');
+const v72Router = require('./routes/v72');
+const usersRouter = require('./routes/users');
+const globalRouter = require('./routes/global');
+const globalMonthlyRouter = require('./routes/globalmonthly');
+const northernMonthlyRouter = require('./routes/northernmonthly');
+const northernRouter = require('./routes/northernhemisphere');
+const southernRouter = require('./routes/southernhemisphere');
+const southernMonthlyRouter = require('./routes/southernmonthly');
+const co2Router = require('./routes/co2annual');
+const co2MonthlyRouter = require('./routes/co2monthly');
+const v4ekaRouter = require('./routes/v4eka');
+const v4tokaRouter = require('./routes/v4toka');
+const v4kolmasRouter = require('./routes/v4kolmas');
 
 
-var app = express();
+const app = express();
 app.use(cors());
 
 app.use(logger('dev'));
@@ -35,6 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
 app.use('/v2', v2Router);
+app.use('/v71', v71Router);
+app.use('/v72', v72Router);
 app.use('/vostok', vostokRouter);
 app.use('/global', globalRouter);
 app.use('/globalmonthly', globalMonthlyRouter);
