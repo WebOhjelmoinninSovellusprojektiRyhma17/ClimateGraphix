@@ -4,9 +4,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mysql = require('mysql');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 //Jokaiselle routes tiedostolle oma
 const vostokRouter = require('./routes/vostok');
+const loginRouter = require('./routes/login');
 const v2Router = require('./routes/v2');
 const v71Router = require('./routes/v71');
 const v72Router = require('./routes/v72');
@@ -51,5 +53,26 @@ app.use('/co2monthly', co2MonthlyRouter);
 app.use('/v4eka', v4ekaRouter);
 app.use('/v4toka', v4tokaRouter);
 app.use('/v4kolmas', v4kolmasRouter);
+app.use('/login', loginRouter);
+
+app.use(authenticateToken);                             //Tämän jälkeen olevat toimivat token autentikoinnilla
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+  
+    console.log("token = "+token);
+    if (token == null) return res.sendStatus(401)
+  
+    jwt.verify(token, process.env.MY_TOKEN, (err, user) => {
+      console.log(err)
+  
+      if (err) return res.sendStatus(403)
+  
+      req.user = user
+  
+      next()
+    })
+  }
 
 module.exports = app;
