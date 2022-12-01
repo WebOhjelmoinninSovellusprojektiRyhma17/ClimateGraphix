@@ -1,30 +1,29 @@
 const db = require('../database');
+const bcrypt = require('bcryptjs');
 
+const saltRounds = 10;
 const user = {
-  getById: function(id, callback) {
-    return db.query('select username,password from user where username=?', [id], callback);
-  },
-  getAll: function(callback) {
+  get: function (callback) {
     return db.query('select * from user', callback);
   },
-  add: function(user, callback) {
-    return db.query(
-      'insert into user (username,password) values(?,?)',
-      [user.username, user.password],
-      callback
-    );
+  getById: function (id, callback) {
+    return db.query('select * from user where username=?', [id], callback);
   },
-  //käyttäjä poistetaan osoitteesta localhost:3001/users/*
-  //tähden tilalle tulee käyttäjänimi
-  delete: function(id, callback) {
-    return db.query('delete from user where username=?', [id], callback);
+  add: function (user, callback) {
+    bcrypt.hash(user.password, saltRounds, function (err, hash) {
+      return db.query('insert into user (username, password) values(?,?)',
+        [user.username, hash], callback);
+    });
   },
-  update: function(id, user, callback) {
-    return db.query(
-      'update user set username=?, password=? where iduser=?',
-      [user.username, user.password, id],
-      callback
-    );
+  delete: function (id, callback) {
+    return db.query('delete from user where idUser=?', [id], callback);
+  },
+  update: function (id, user, callback) {
+    bcrypt.hash(user.password, saltRounds, function (err, hash) {
+      return db.query('update user set username=?, password=? where idUser=?',
+        [user.username, hash, id], callback);
+    });
   }
-};
+
+}
 module.exports = user;
