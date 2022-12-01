@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js";
-import { getElementAtEvent, Doughnut, Pie } from "react-chartjs-2";
+import { getElementAtEvent, Doughnut } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import { useState } from "react";
 import axios from "axios";
@@ -11,6 +11,7 @@ export default function V9() {
     const [sectorData, setSectorData] = useState([]);
     const [subsectordata, setSubsectordata] = useState([]);
     const [subsectorfurtherdata, setSubsectorfurtherdata] = useState([]);
+    const [sectorLabel, setSectorLabel] = useState([]);
 
     const URL = 'http://localhost:3001/'
     const chartRef = useRef();
@@ -48,20 +49,35 @@ export default function V9() {
         getSectorData();
         getSubSectorData();
         getSubSectorFurtherData();
+        console.log(sectorLabels);
+        console.log(industrySub);
     }, []);
+
+    let energySub = subsectordata.slice(0, 6);
+    let industrySub = subsectordata.slice(6, 8);
+    let wasteSub = subsectordata.slice(15, 17);
+    let agricultureSub = subsectordata.slice(8, 14);
+
+    let sectorLabels = sectorData.map(function (item) {
+        return item.sectorname;
+    })
+
+    let subsectorLabels = subsectordata.map(function (item) {
+        return item.sectorname;
+    })
 
     // Ensimmäinen donitsi
     const data = {
         datasets: [
             {
-                labels: ["Energy", "Industrial processes", "Waste", "Agriculture, Forestry & Land Use (AFOLU)"],
+                //labels: sectorLabels,
                 data: sectorData,
                 //borderColor: "rgb(255,182,193)",
                 backgroundColor: [
-                    'rgb(128,0,0)',
-                    'rgb(255,215,0)',
-                    'rgb(255,0,0)',
-                    'rgb(233,150,122)',
+                    'rgb(238,232,170)',
+                    'rgb(152,251,152)',
+                    'rgb(64,224,208)',
+                    'rgb(255,182,193)',
                 ],
                 parsing: {
                     key: "emissions"
@@ -73,103 +89,123 @@ export default function V9() {
                 },
                 borderWidth: 1,
             },
-            {
-                // testidata
-                labels: ["eka", "toka", "kolmas", "neljas"],
-                data: [20, 15, 30, 35],
-            }
         ],
     };
 
-    // Toinen donitsi. Tämä pitäisi saada ensimmäisen ulkopuolelle avautumaan tai parsia yksittäisiin donitseihin.
-    // Pitäisi saada myös labelit jotenkin suoraan tietokannasta, kun ne tällähetkellä on kirjoitettu käsin.
-
-    const data2 = {
-        labels: ["Wastewater", "Unallocated fuel combustion", "Transport", "Rice Cultivation", "Livestock & Manure", "Landfills", "Grassland", "Fugitive emissions from energy", "Forest Land", "Energy in industry", "Energy in buildings (elec and heat)", "Energy in Agri & Fishing", "Cropland", "Crop Burning", "Chemical & petrochemical (industrial)", "Cement", "Agricultural Soils"],
-        datasets: [
-            {
-                data: subsectordata,
-                backgroundColor: [
-                    'rgb(128,0,0)',
-                    'rgb(139,0,0)',
-                    'rgb(165,42,42)',
-                    'rgb(178,34,34)',
-                    'rgb(220,20,60)',
-                    'rgb(255,0,0)',
-                    'rgb(255,99,71)',
-                    'rgb(255,127,80)',
-                    'rgb(205,92,92)',
-                    'rgb(240,128,128)',
-                    'rgb(233,150,122)',
-                    'rgb(250,128,114)',
-                    'rgb(255,160,122)',
-                    'rgb(255,69,0)',
-                    'rgb(255,140,0)',
-                    'rgb(255,165,0)',
-                    'rgb(255,215,0)',
-                ],
-                parsing: {
-                    key: "Share of global greenhouse gas emissions (%)"
-                },
-                options: {
-                    redraw: true,
-                    datasetIdKey: 'toinen',
-                },
-                borderWidth: 1,
-            }
-        ]
+    const energyData = {
+        data: energySub,
+        backgroundColor: [
+            'rgb(238,232,170)',
+            'rgb(152,251,152)',
+            'rgb(64,224,208)',
+            'rgb(255,182,193)',
+            'rgb(65,105,225)',
+            'rgb(218,112,214)',
+        ],
+        parsing : {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
     }
 
-    // Kolmas donitsi. Sama homma kuin edellisessä, mutta vielä tarkempi versio kakkosdonitsista.
-
-    const data3 = {
-        labels: ["Road", "Aviation", "Rail", "Pipeline", "Ship", "Residential", "Commercial", "Iron & Steel", "Non-ferous metals", "Machinery", "Food and tobacco", "Paper, pulp & printing", "Chemical & petrochemical (energy)", "Other industry", "Energy in Agri & Fishing", "Unallocated fuel combustion", "Coal", "Oil & Natural Gas", "Cement", "Chemical & petrochemical (industrial)", "Livestock & Manure", "Rice Cultivation", "Agricultural Soils", "Crop Burning", "Forest Land", "Cropland", "Grassland", "Landfills", "Wastewater"],
-        datasets: [
-            {
-                data: subsectorfurtherdata,
-                backgroundColor: [
-                    'rgb(128,0,0)',
-                    'rgb(255,215,0)',
-                    'rgb(255,0,0)',
-                    'rgb(233,150,122)',
-                ],
-                parsing: {
-                    key: "Share of global greenhouse gas emissions (%)"
-                },
-                borderWidth: 1,
-            },
+    const industryData = {
+        data: industrySub,
+        backgroundColor: [
+            'rgb(238,232,170)',
+            'rgb(152,251,152)',
+            'rgb(64,224,208)',
+            'rgb(255,182,193)',
+            'rgb(65,105,225)',
+            'rgb(218,112,214)',
         ],
-    };
+        parsing : {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    const wasteData = {
+        data: wasteSub,
+        backgroundColor: [
+            'rgb(238,232,170)',
+            'rgb(152,251,152)',
+            'rgb(64,224,208)',
+            'rgb(255,182,193)',
+            'rgb(65,105,225)',
+            'rgb(218,112,214)',
+        ],
+        parsing : {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    const agricultureData = {
+        data: agricultureSub,
+        backgroundColor: [
+            'rgb(238,232,170)',
+            'rgb(152,251,152)',
+            'rgb(64,224,208)',
+            'rgb(255,182,193)',
+            'rgb(65,105,225)',
+            'rgb(218,112,214)',
+        ],
+        parsing : {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    // Lisää datasetin
+    function addData(chart, data) {
+        chart.data.datasets.push(data);
+        chart.update();
+    }
+
+    // Poistaa nykyisen chartin
+    function removeData(chart) {
+        chart.data.labels.pop();
+        chart.data.datasets.pop()
+
+        chart.update();
+    }
 
     // Funktio, joka ajetaan aina klikatessa
     const onClick = (event) => {
-        
+
         const chart = chartRef.current;                             // Klikattu chartti
         const element = (getElementAtEvent(chart, event));          // Klikatun sektorin data muuttujaan
-        const { datasetIndex, index } = element[0];                 // Eritellään indeksi ja datasetin indeksi sektorista
-
+        const { index } = element[0];                 // Eritellään indeksi ja datasetin indeksi sektorista
 
         // if else, jonka pitäsi joskus tulostaa uusi chartti tiettyä sektoria klikattaessa
-        if(index == 0) {
-            console.log("ensimmäinen sektori");
-            data.datasets.push(data2);
-            chart.update();
-        } else if(index == 1) {
-            console.log("toinen sektori");
-        } else if(index == 2) {
-            console.log("kolmas sektori");
-        } else if(index == 3) {
-            console.log("neljäs sektori");
-        }
 
-        console.log(element);
+        switch (index) {
+            case 0:
+                console.log("ensimmäinen sektori");
+                removeData(chart);
+                addData(chart, energyData);
+                break;
+            case 1:
+                console.log("toinen sektori");
+                removeData(chart);
+                addData(chart, industryData);
+                break;
+            case 2:
+                console.log("kolmas sektori");
+                removeData(chart);
+                addData(chart, wasteData);
+                break;
+            case 3:
+                console.log("neljäs sektori");
+                removeData(chart);
+                addData(chart, agricultureData);
+                break;
+            default:
+                break;
+        }
     }
 
     // Määritellään, mitä palautetaan.
     return (
         <div className="V9">
             <h2>CO2 emissions by sectors</h2>
-            <Pie
+            <Doughnut
                 id="eka"
                 ref={chartRef}
                 data={data}
