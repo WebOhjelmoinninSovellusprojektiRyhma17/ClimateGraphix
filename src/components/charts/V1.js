@@ -161,7 +161,7 @@ export default function V1() {
                 borderColor: "rgb(255,000,000)",
                 backgroundColor: "rgba(255,000,000, 0.5)",
                 parsing: {                                                              //Valitaan avain sanat mitkä tiedot otetaan.
-                    xAxisKey: "year",
+                    xAxisKey: "date_format(year, '%Y')",
                     yAxisKey: "T",
                 },
                 pointRadius: 1,

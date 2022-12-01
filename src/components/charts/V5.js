@@ -54,6 +54,7 @@ export default function V1() {
         },
         scales: {
             x: {
+                reverse: true,
                 type: "linear",
                 max: 420000,
                 min: 0
