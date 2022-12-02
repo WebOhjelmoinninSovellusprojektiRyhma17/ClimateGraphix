@@ -7,6 +7,20 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
 //Jokaiselle routes tiedostolle oma
+
+var vostokRouter = require('./routes/vostok');
+var usersRouter = require('./routes/users');
+var globalRouter = require('./routes/global');
+var globalMonthlyRouter = require('./routes/globalmonthly');
+var northernMonthlyRouter = require('./routes/northernmonthly');
+var northernRouter = require('./routes/northernhemisphere');
+var southernRouter = require('./routes/southernhemisphere');
+var southernMonthlyRouter = require('./routes/southernmonthly');
+var co2annualRouter = require('./routes/co2annual');
+var NationalCoRouter = require('./routes/NationalCo2')
+
+var app = express();
+
 const vostokRouter = require('./routes/vostok');
 const loginRouter = require('./routes/login');
 const v2Router = require('./routes/v2');
@@ -25,8 +39,8 @@ const v4ekaRouter = require('./routes/v4eka');
 const v4tokaRouter = require('./routes/v4toka');
 const v4kolmasRouter = require('./routes/v4kolmas');
 
-
 const app = express();
+
 app.use(cors());
 
 app.use(logger('dev'));
@@ -34,7 +48,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
@@ -48,6 +61,8 @@ app.use('/northernmonthly', northernMonthlyRouter);
 app.use('/northern', northernRouter);
 app.use('/southern', southernRouter);
 app.use('/southernmonthly', southernMonthlyRouter);
+app.use('/co2annual', co2annualRouter);
+app.use('/NationalCo2', NationalCoRouter)
 app.use('/co2annual', co2Router);
 app.use('/co2monthly', co2MonthlyRouter);
 app.use('/v4eka', v4ekaRouter);
@@ -74,5 +89,4 @@ function authenticateToken(req, res, next) {
       next()
     })
   }
-
 module.exports = app;
