@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js";
-import { getElementAtEvent,getDatasetAtEvent, Doughnut } from "react-chartjs-2";
+import { getElementAtEvent, getDatasetAtEvent, Doughnut } from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import "chartjs-adapter-luxon";
 import { useState } from "react";
 import axios from "axios";
@@ -14,6 +15,15 @@ export default function V9() {
 
     const URL = 'http://localhost:3001/'
     const chartRef = useRef();
+
+    Chart.register(ChartDataLabels);
+
+    Chart.defaults.set('plugins.datalabels', {
+        color: 'white',
+        formatter: function(value, context) {
+            return context.dataset.labels[context.dataIndex];
+          }
+    });
 
     // Hakee tiedot tietokannasta
     const getSectorData = () => {
@@ -52,34 +62,43 @@ export default function V9() {
         console.log(sectorLabels);
     }, []);
 
+    let sectorLabels = sectorData.map(function (item) { return item.sectorname });
+    let sectorEmissions = sectorData.map(function (item){ return item.emissions});
+
     let energySub = subsectordata.slice(0, 6);
+    let energyLabels = energySub.map(function (item) { return item.sectorname });
+    let energyEmissions = energySub.map(function (item){ return item.emissions});
+
     let industrySub = subsectordata.slice(6, 8);
+    let industryLabels = industrySub.map(function(item) { return item.sectorname});
+    let industryEmissions = industrySub.map(function (item){ return item.emissions});
+
     let wasteSub = subsectordata.slice(8, 10);
+    let wasteLabels = wasteSub.map(function(item) { return item.sectorname});
+    let wasteEmissions = wasteSub.map(function (item){ return item.emissions});
+
     let agricultureSub = subsectordata.slice(10, 17);
+    let agricultureLabels = agricultureSub.map(function(item) { return item.sectorname});
+    let agricultureEmissions = agricultureSub.map(function (item){ return item.emissions});
 
     let transport = subsectorfurtherdata.slice(0, 5);
+    let transportLabels = transport.map(function(item) { return item.sectorname});
+    let transportEmissions = transport.map(function (item){ return item.emissions});
+
     let eBuildings = subsectorfurtherdata.slice(5, 7);
+    let eBuildingsLabels = eBuildings.map(function(item) { return item.sectorname});
+    let eBuildingsEmissions = eBuildings.map(function (item){ return item.emissions});
+
     let eIndustry = subsectorfurtherdata.slice(7, 14);
-
-    let sectorLabels = sectorData.map(function (item) {
-        return item.sectorname;
-    })
-
-    let subLabels = subsectordata.map(function (item) {
-        return item.sectorname;
-    })
-
-    let furtherLabels = subsectorfurtherdata.map(function (item) {
-        return item.sectorname;
-    })
-
+    let eIndustryLabels = eIndustry.map(function(item) { return item.sectorname});
+    let eIndustryEmissions = eIndustry.map(function (item){ return item.emissions});
 
     // Ensimmäinen donitsi
     const data = {
-        //labels: sectorLabels,
         datasets: [
             {
-                data: sectorData,
+                labels: sectorLabels,
+                data: sectorEmissions,
                 //borderColor: "rgb(255,182,193)",
                 backgroundColor: [
                     'rgb(102,0,0)',
@@ -87,40 +106,21 @@ export default function V9() {
                     'rgb(64,224,208)',
                     'rgb(255,182,193)',
                 ],
-
                 parsing: {
                     key: "emissions"
-                },
-                options: {
-                    responsive: true,
-                    redraw: true,
-                    plugins: {
-                        datalabels: {
-                            labels: {
-                                index: {
-                                    color: '#404040',
-                                    font: {
-                                        size: 18
-                                    },
-
-                                }
-                            }
-                        }
-                    },
                 },
                 borderWidth: 3,
             },
         ],
-    };
-
-    const options = {
         options: {
             responsive: true,
+            redraw: true,
         }
-    }
+    };
 
     const sector = {
-        data: sectorData,
+        labels: sectorLabels,
+        data: sectorEmissions,
         backgroundColor: [
             'rgb(102,0,0)',
             'rgb(152,251,152)',
@@ -134,58 +134,65 @@ export default function V9() {
     }
 
     const energyData = {
-        data: energySub,
+        labels: energyLabels,
+        data: energyEmissions,
         backgroundColor: 'rgb(102,0,0)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
     const industryData = {
-        data: industrySub,
+        labels: industryLabels,
+        data: industryEmissions,
         backgroundColor: 'rgb(152,251,152)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
     const wasteData = {
-        data: wasteSub,
+        labels: wasteLabels,
+        data: wasteEmissions,
         backgroundColor: 'rgb(64,224,208)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
     const agricultureData = {
-        data: agricultureSub,
+        labels: agricultureLabels,
+        data: agricultureEmissions,
         backgroundColor: 'rgb(255,182,193)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
     const transportData = {
-        data: transport,
+        labels: transportLabels,
+        data: transportEmissions,
         backgroundColor: 'rgb(102,0,0)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
     const eBuildingsData = {
-        data: eBuildings,
+        labels: eBuildingsLabels,
+        data: eBuildingsEmissions,
         backgroundColor: 'rgb(102,0,0)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
     const eIndustryData = {
-        data: eIndustry,
+        labels: eIndustryLabels,
+        data: eIndustryEmissions,
         backgroundColor: 'rgb(102,0,0)',
         parsing: {
-            key: "Share of global greenhouse gas emissions (%)"
+            key: "emissions"
         }
     }
 
@@ -214,22 +221,22 @@ export default function V9() {
         if (datas.length === 4 & index === 0) {
             removeData(chart);
             addData(chart, energyData);
-        } else if(datas.length === 4 & index === 1) {
+        } else if (datas.length === 4 & index === 1) {
             removeData(chart);
             addData(chart, industryData);
-        } else if(datas.length === 4 & index === 2) {
+        } else if (datas.length === 4 & index === 2) {
             removeData(chart);
             addData(chart, wasteData);
-        } else if(datas.length === 4 & index === 3) {
+        } else if (datas.length === 4 & index === 3) {
             removeData(chart);
             addData(chart, agricultureData);
-        } else if(datas.length === 6 & index === 0) {
+        } else if (datas.length === 6 & index === 0) {
             removeData(chart);
             addData(chart, transportData);
-        } else if(datas.length === 6 & index === 1) {
+        } else if (datas.length === 6 & index === 1) {
             removeData(chart);
             addData(chart, eBuildingsData);
-        } else if(datas.length === 6 & index === 2) {
+        } else if (datas.length === 6 & index === 2) {
             removeData(chart);
             addData(chart, eIndustryData);
         } else {
@@ -248,7 +255,6 @@ export default function V9() {
             <Doughnut
                 ref={chartRef}
                 data={data}
-                options={options}
                 onClick={onClick}
             />
         </div>
