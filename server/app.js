@@ -8,18 +8,7 @@ const jwt = require('jsonwebtoken');
 
 //Jokaiselle routes tiedostolle oma
 
-var vostokRouter = require('./routes/vostok');
-var usersRouter = require('./routes/users');
-var globalRouter = require('./routes/global');
-var globalMonthlyRouter = require('./routes/globalmonthly');
-var northernMonthlyRouter = require('./routes/northernmonthly');
-var northernRouter = require('./routes/northernhemisphere');
-var southernRouter = require('./routes/southernhemisphere');
-var southernMonthlyRouter = require('./routes/southernmonthly');
-var co2annualRouter = require('./routes/co2annual');
-var NationalCoRouter = require('./routes/NationalCo2')
-
-var app = express();
+const app = express();
 
 const vostokRouter = require('./routes/vostok');
 const loginRouter = require('./routes/login');
@@ -35,11 +24,14 @@ const southernRouter = require('./routes/southernhemisphere');
 const southernMonthlyRouter = require('./routes/southernmonthly');
 const co2Router = require('./routes/co2annual');
 const co2MonthlyRouter = require('./routes/co2monthly');
+const co2annualRouter = require('./routes/co2annual');
 const v4ekaRouter = require('./routes/v4eka');
 const v4tokaRouter = require('./routes/v4toka');
 const v4kolmasRouter = require('./routes/v4kolmas');
-
-const app = express();
+const NationalCoRouter = require('./routes/NationalCo2');
+const sectorRouter = require('./routes/sector');
+const subsectorRouter = require('./routes/subsector');
+const subsectorfurtherRouter = require('./routes/subsectorfurther');
 
 app.use(cors());
 
@@ -69,6 +61,9 @@ app.use('/v4eka', v4ekaRouter);
 app.use('/v4toka', v4tokaRouter);
 app.use('/v4kolmas', v4kolmasRouter);
 app.use('/login', loginRouter);
+app.use('/sector', sectorRouter);
+app.use('/subsector', subsectorRouter);
+app.use('/subsectorfurther', subsectorfurtherRouter);
 
 app.use(authenticateToken);                             //Tämän jälkeen olevat toimivat token autentikoinnilla
 
