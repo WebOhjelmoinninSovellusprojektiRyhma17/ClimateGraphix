@@ -8,7 +8,7 @@ import axios from "axios";
 
 export default function V9() {
 
-    // Määritellään ja alustetaan tilamuuttujat
+    // Määritellään ja alustetaan tilamuuttujat ja muut muuttujat
     const [sectorData, setSectorData] = useState([]);
     const [subsectordata, setSubsectordata] = useState([]);
     const [subsectorfurtherdata, setSubsectorfurtherdata] = useState([]);
@@ -16,13 +16,16 @@ export default function V9() {
     const URL = 'http://localhost:3001/'
     const chartRef = useRef();
 
+    // Asettaa kaikkiin chartteihin labelit näkymään sektoreiden keskellä
     Chart.register(ChartDataLabels);
-
     Chart.defaults.set('plugins.datalabels', {
         color: 'white',
-        formatter: function(value, context) {
-            return context.dataset.labels[context.dataIndex];
-          }
+        formatter: function (value, context) {
+            const text = context.dataset.labels[context.dataIndex];
+            const numbers = context.dataset.data[context.dataIndex];
+            return text + ': ' + numbers + '%';
+            //return text + '\n' + numbers + '%';
+        }
     });
 
     // Hakee tiedot tietokannasta
@@ -58,53 +61,54 @@ export default function V9() {
         getSectorData();
         getSubSectorData();
         getSubSectorFurtherData();
-        console.log(industrySub);
-        console.log(sectorLabels);
     }, []);
 
+
+    // Slice pätkii tulevan datan pienempiin osiin, jotta datasta saadaan aina yksi uusi datasetti.
+    // Mappauksella saadaan parsittua pelkät labelit saadusta datasta sekä pelkät prosentit, jotta saadaan ne labeleihin näkyviin
+
     let sectorLabels = sectorData.map(function (item) { return item.sectorname });
-    let sectorEmissions = sectorData.map(function (item){ return item.emissions});
+    let sectorEmissions = sectorData.map(function (item) { return item.emissions });
 
     let energySub = subsectordata.slice(0, 6);
     let energyLabels = energySub.map(function (item) { return item.sectorname });
-    let energyEmissions = energySub.map(function (item){ return item.emissions});
+    let energyEmissions = energySub.map(function (item) { return item.emissions });
 
     let industrySub = subsectordata.slice(6, 8);
-    let industryLabels = industrySub.map(function(item) { return item.sectorname});
-    let industryEmissions = industrySub.map(function (item){ return item.emissions});
+    let industryLabels = industrySub.map(function (item) { return item.sectorname });
+    let industryEmissions = industrySub.map(function (item) { return item.emissions });
 
     let wasteSub = subsectordata.slice(8, 10);
-    let wasteLabels = wasteSub.map(function(item) { return item.sectorname});
-    let wasteEmissions = wasteSub.map(function (item){ return item.emissions});
+    let wasteLabels = wasteSub.map(function (item) { return item.sectorname });
+    let wasteEmissions = wasteSub.map(function (item) { return item.emissions });
 
     let agricultureSub = subsectordata.slice(10, 17);
-    let agricultureLabels = agricultureSub.map(function(item) { return item.sectorname});
-    let agricultureEmissions = agricultureSub.map(function (item){ return item.emissions});
+    let agricultureLabels = agricultureSub.map(function (item) { return item.sectorname });
+    let agricultureEmissions = agricultureSub.map(function (item) { return item.emissions });
 
     let transport = subsectorfurtherdata.slice(0, 5);
-    let transportLabels = transport.map(function(item) { return item.sectorname});
-    let transportEmissions = transport.map(function (item){ return item.emissions});
+    let transportLabels = transport.map(function (item) { return item.sectorname });
+    let transportEmissions = transport.map(function (item) { return item.emissions });
 
     let eBuildings = subsectorfurtherdata.slice(5, 7);
-    let eBuildingsLabels = eBuildings.map(function(item) { return item.sectorname});
-    let eBuildingsEmissions = eBuildings.map(function (item){ return item.emissions});
+    let eBuildingsLabels = eBuildings.map(function (item) { return item.sectorname });
+    let eBuildingsEmissions = eBuildings.map(function (item) { return item.emissions });
 
     let eIndustry = subsectorfurtherdata.slice(7, 14);
-    let eIndustryLabels = eIndustry.map(function(item) { return item.sectorname});
-    let eIndustryEmissions = eIndustry.map(function (item){ return item.emissions});
+    let eIndustryLabels = eIndustry.map(function (item) { return item.sectorname });
+    let eIndustryEmissions = eIndustry.map(function (item) { return item.emissions });
 
-    // Ensimmäinen donitsi
+    // Data ensimmäisen donitsin piirtämiseen
     const data = {
         datasets: [
             {
                 labels: sectorLabels,
                 data: sectorEmissions,
-                //borderColor: "rgb(255,182,193)",
                 backgroundColor: [
-                    'rgb(102,0,0)',
-                    'rgb(152,251,152)',
-                    'rgb(64,224,208)',
-                    'rgb(255,182,193)',
+                    'rgb(128,0,0)',
+                    'rgb(255,140,0)',
+                    'rgb(85,107,47)',
+                    'rgb(107,142,35)',
                 ],
                 parsing: {
                     key: "emissions"
@@ -112,22 +116,24 @@ export default function V9() {
                 borderWidth: 3,
             },
         ],
+
+    };
+    const options = {
         options: {
             responsive: true,
-            redraw: true,
         }
-    };
+    }
 
+    // Alla määritellään datat kaikkiin luotaviin datasetteihin
     const sector = {
         labels: sectorLabels,
         data: sectorEmissions,
         backgroundColor: [
-            'rgb(102,0,0)',
-            'rgb(152,251,152)',
-            'rgb(64,224,208)',
-            'rgb(255,182,193)',
+            'rgb(178,34,34)',
+            'rgb(255,140,0)',
+            'rgb(85,107,47)',
+            'rgb(107,142,35)',
         ],
-
         parsing: {
             key: "emissions"
         },
@@ -136,7 +142,9 @@ export default function V9() {
     const energyData = {
         labels: energyLabels,
         data: energyEmissions,
-        backgroundColor: 'rgb(102,0,0)',
+        backgroundColor: [
+            'rgb(178,34,34)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -145,7 +153,9 @@ export default function V9() {
     const industryData = {
         labels: industryLabels,
         data: industryEmissions,
-        backgroundColor: 'rgb(152,251,152)',
+        backgroundColor: [
+            'rgb(255,140,0)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -154,7 +164,9 @@ export default function V9() {
     const wasteData = {
         labels: wasteLabels,
         data: wasteEmissions,
-        backgroundColor: 'rgb(64,224,208)',
+        backgroundColor: [
+            'rgb(85,107,47)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -163,7 +175,9 @@ export default function V9() {
     const agricultureData = {
         labels: agricultureLabels,
         data: agricultureEmissions,
-        backgroundColor: 'rgb(255,182,193)',
+        backgroundColor: [
+            'rgb(107,142,35)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -172,7 +186,9 @@ export default function V9() {
     const transportData = {
         labels: transportLabels,
         data: transportEmissions,
-        backgroundColor: 'rgb(102,0,0)',
+        backgroundColor: [
+            'rgb(139,69,19)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -181,7 +197,9 @@ export default function V9() {
     const eBuildingsData = {
         labels: eBuildingsLabels,
         data: eBuildingsEmissions,
-        backgroundColor: 'rgb(102,0,0)',
+        backgroundColor: [
+            'rgb(184,134,11)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -190,7 +208,9 @@ export default function V9() {
     const eIndustryData = {
         labels: eIndustryLabels,
         data: eIndustryEmissions,
-        backgroundColor: 'rgb(102,0,0)',
+        backgroundColor: [
+            'rgb(210,105,30)',
+        ],
         parsing: {
             key: "emissions"
         }
@@ -202,21 +222,22 @@ export default function V9() {
         chart.update();
     }
 
-    // Poistaa nykyisen chartin
+    // Poistaa ennen klikkausta näkyvän datasetin
     function removeData(chart) {
         chart.data.datasets.pop();
-        //chart.data.labels.pop();
         chart.update();
     }
-
 
     // Funktio, joka ajetaan aina klikatessa
     const onClick = (event) => {
 
         const chart = chartRef.current;                             // Klikattu chartti
         const element = (getElementAtEvent(chart, event));          // Klikatun sektorin data muuttujaan
-        const { index } = element[0];                 // Eritellään indeksi ja datasetin indeksi sektorista
-        const datas = (getDatasetAtEvent(chart, event));
+        const { index } = element[0];                               // Tallennetaan klikatun sektorin indeksi muuttujaan
+        const datas = (getDatasetAtEvent(chart, event));            // Tallennetaan klikatun sektorin datasetti muuttujaan
+
+        // If else, joka tarkistaa saadun datasetin taulukon pituuden 
+        //ja klikatun sektorin indeksin ja lisää niiden perusteella uuden datasetin
 
         if (datas.length === 4 & index === 0) {
             removeData(chart);
@@ -240,23 +261,28 @@ export default function V9() {
             removeData(chart);
             addData(chart, eIndustryData);
         } else {
-            removeData(chart);
-            addData(chart, sector);
+            return;
+            // Nämä jos laittaa, piirtää ensimmäisen chartin aina, kun klikatusta sektorista ei enempää dataa
+            //removeData(chart);
+            //addData(chart, sector);
         }
 
         console.log(element);
         console.log(datas);
     }
 
-    // Määritellään, mitä palautetaan.
+    // Määritellään, mitä palautetaan sivulle.
     return (
         <div className="V9">
             <h2>CO2 emissions by sectors</h2>
             <Doughnut
                 ref={chartRef}
                 data={data}
+                options={options}
                 onClick={onClick}
             />
+            <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" >Description</a><br></br>
+            <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" >Datasets</a>
         </div>
     );
 }
