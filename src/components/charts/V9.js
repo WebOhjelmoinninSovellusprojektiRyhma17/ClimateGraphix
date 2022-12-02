@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js";
-import { getElementAtEvent, Doughnut } from "react-chartjs-2";
+import { getElementAtEvent,getDatasetAtEvent, Doughnut } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import { useState } from "react";
 import axios from "axios";
@@ -49,83 +49,143 @@ export default function V9() {
         getSubSectorData();
         getSubSectorFurtherData();
         console.log(industrySub);
+        console.log(sectorLabels);
     }, []);
 
+    let energySub = subsectordata.slice(0, 6);
     let industrySub = subsectordata.slice(6, 8);
+    let wasteSub = subsectordata.slice(8, 10);
+    let agricultureSub = subsectordata.slice(10, 17);
+
+    let transport = subsectorfurtherdata.slice(0, 5);
+    let eBuildings = subsectorfurtherdata.slice(5, 7);
+    let eIndustry = subsectorfurtherdata.slice(7, 14);
+
+    let sectorLabels = sectorData.map(function (item) {
+        return item.sectorname;
+    })
+
+    let subLabels = subsectordata.map(function (item) {
+        return item.sectorname;
+    })
+
+    let furtherLabels = subsectorfurtherdata.map(function (item) {
+        return item.sectorname;
+    })
+
 
     // Ensimmäinen donitsi
     const data = {
+        //labels: sectorLabels,
         datasets: [
             {
                 data: sectorData,
                 //borderColor: "rgb(255,182,193)",
                 backgroundColor: [
-                    'rgb(238,232,170)',
+                    'rgb(102,0,0)',
                     'rgb(152,251,152)',
                     'rgb(64,224,208)',
                     'rgb(255,182,193)',
                 ],
+
                 parsing: {
                     key: "emissions"
                 },
                 options: {
                     responsive: true,
                     redraw: true,
-                    datasetIdKey: 'eka',
+                    plugins: {
+                        datalabels: {
+                            labels: {
+                                index: {
+                                    color: '#404040',
+                                    font: {
+                                        size: 18
+                                    },
+
+                                }
+                            }
+                        }
+                    },
                 },
-                borderWidth: 1,
+                borderWidth: 3,
             },
-            {
-                data: [1, 2, 3],
-                hidden: true
-            }
         ],
     };
 
-    const subData = {
-        data: subsectordata,
+    const options = {
+        options: {
+            responsive: true,
+        }
+    }
+
+    const sector = {
+        data: sectorData,
         backgroundColor: [
-            'rgb(238,232,170)',
-            'rgb(238,232,170)',
-            'rgb(238,232,170)',
-            'rgb(238,232,170)',
-            'rgb(238,232,170)',
-            'rgb(238,232,170)',
-            'rgb(152,251,152)',
+            'rgb(102,0,0)',
             'rgb(152,251,152)',
             'rgb(64,224,208)',
-            'rgb(64,224,208)',
-            'rgb(255,182,193)',
-            'rgb(255,182,193)',
-            'rgb(255,182,193)',
-            'rgb(255,182,193)',
-            'rgb(255,182,193)',
-            'rgb(255,182,193)',
             'rgb(255,182,193)',
         ],
+
+        parsing: {
+            key: "emissions"
+        },
+    }
+
+    const energyData = {
+        data: energySub,
+        backgroundColor: 'rgb(102,0,0)',
         parsing: {
             key: "Share of global greenhouse gas emissions (%)"
         }
     }
 
-    const subfurtherData = {
-        data: subsectorfurtherdata,
+    const industryData = {
+        data: industrySub,
+        backgroundColor: 'rgb(152,251,152)',
         parsing: {
             key: "Share of global greenhouse gas emissions (%)"
-        },
-        backgroundColor: [
-            'rgb(238,232,170)',
-        ],
-        circumference: 263.65
+        }
     }
 
-    const options = {
-        options: {
-            plugins: {
-                tooltip: {
-                    label: "kfapo"
-                }
-            }
+    const wasteData = {
+        data: wasteSub,
+        backgroundColor: 'rgb(64,224,208)',
+        parsing: {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    const agricultureData = {
+        data: agricultureSub,
+        backgroundColor: 'rgb(255,182,193)',
+        parsing: {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    const transportData = {
+        data: transport,
+        backgroundColor: 'rgb(102,0,0)',
+        parsing: {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    const eBuildingsData = {
+        data: eBuildings,
+        backgroundColor: 'rgb(102,0,0)',
+        parsing: {
+            key: "Share of global greenhouse gas emissions (%)"
+        }
+    }
+
+    const eIndustryData = {
+        data: eIndustry,
+        backgroundColor: 'rgb(102,0,0)',
+        parsing: {
+            key: "Share of global greenhouse gas emissions (%)"
         }
     }
 
@@ -137,34 +197,48 @@ export default function V9() {
 
     // Poistaa nykyisen chartin
     function removeData(chart) {
-        chart.data.datasets.pop()
-
+        chart.data.datasets.pop();
+        //chart.data.labels.pop();
         chart.update();
     }
+
 
     // Funktio, joka ajetaan aina klikatessa
     const onClick = (event) => {
 
         const chart = chartRef.current;                             // Klikattu chartti
         const element = (getElementAtEvent(chart, event));          // Klikatun sektorin data muuttujaan
-        const { datasetIndex} = element[0];                 // Eritellään indeksi ja datasetin indeksi sektorista
+        const { index } = element[0];                 // Eritellään indeksi ja datasetin indeksi sektorista
+        const datas = (getDatasetAtEvent(chart, event));
 
-        // if else, jonka pitäsi joskus tulostaa uusi chartti tiettyä sektoria klikattaessa
-
-        switch (datasetIndex) {
-            case 0:
-                console.log("ensimmäinen sektori");
-                removeData(chart)
-                addData(chart, subData);
-                break;
-            case 1:
-                console.log("neljäs sektori");
-                addData(chart, subfurtherData);
-                break;
-            default:
-                break;
+        if (datas.length === 4 & index === 0) {
+            removeData(chart);
+            addData(chart, energyData);
+        } else if(datas.length === 4 & index === 1) {
+            removeData(chart);
+            addData(chart, industryData);
+        } else if(datas.length === 4 & index === 2) {
+            removeData(chart);
+            addData(chart, wasteData);
+        } else if(datas.length === 4 & index === 3) {
+            removeData(chart);
+            addData(chart, agricultureData);
+        } else if(datas.length === 6 & index === 0) {
+            removeData(chart);
+            addData(chart, transportData);
+        } else if(datas.length === 6 & index === 1) {
+            removeData(chart);
+            addData(chart, eBuildingsData);
+        } else if(datas.length === 6 & index === 2) {
+            removeData(chart);
+            addData(chart, eIndustryData);
+        } else {
+            removeData(chart);
+            addData(chart, sector);
         }
+
         console.log(element);
+        console.log(datas);
     }
 
     // Määritellään, mitä palautetaan.
