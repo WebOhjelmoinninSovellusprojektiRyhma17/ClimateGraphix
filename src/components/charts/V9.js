@@ -7,7 +7,8 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function V9() {
-
+    // Asettaa kaikkiin chartteihin labelit näkymään sektoreiden keskellä
+    Chart.register(ChartDataLabels);
     // Määritellään ja alustetaan tilamuuttujat ja muut muuttujat
     const [sectorData, setSectorData] = useState([]);
     const [subsectordata, setSubsectordata] = useState([]);
@@ -16,24 +17,11 @@ export default function V9() {
     const URL = 'http://localhost:3001/'
     const chartRef = useRef();
 
-    // Asettaa kaikkiin chartteihin labelit näkymään sektoreiden keskellä
-    Chart.register(ChartDataLabels);
-    Chart.defaults.set('plugins.datalabels', {
-        color: 'white',
-        formatter: function (value, context) {
-            const text = context.dataset.labels[context.dataIndex];
-            const numbers = context.dataset.data[context.dataIndex];
-            return text + ': ' + numbers + '%';
-            //return text + '\n' + numbers + '%';
-        }
-    });
-
     // Hakee tiedot tietokannasta
     const getSectorData = () => {
         axios.get(`${URL}sector`)
             .then((response) => {
                 setSectorData(response.data);
-                console.log(sectorData);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -42,7 +30,6 @@ export default function V9() {
         axios.get(`${URL}subsector`)
             .then((response) => {
                 setSubsectordata(response.data);
-                console.log(subsectordata);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -51,7 +38,6 @@ export default function V9() {
         axios.get(`${URL}subsectorfurther`)
             .then((response) => {
                 setSubsectorfurtherdata(response.data);
-                console.log(subsectorfurtherdata);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -97,32 +83,6 @@ export default function V9() {
     let eIndustry = subsectorfurtherdata.slice(7, 14);
     let eIndustryLabels = eIndustry.map(function (item) { return item.sectorname });
     let eIndustryEmissions = eIndustry.map(function (item) { return item.emissions });
-
-    // Data ensimmäisen donitsin piirtämiseen
-    const data = {
-        datasets: [
-            {
-                labels: sectorLabels,
-                data: sectorEmissions,
-                backgroundColor: [
-                    'rgb(128,0,0)',
-                    'rgb(255,140,0)',
-                    'rgb(85,107,47)',
-                    'rgb(107,142,35)',
-                ],
-                parsing: {
-                    key: "emissions"
-                },
-                borderWidth: 3,
-            },
-        ],
-
-    };
-    const options = {
-        options: {
-            responsive: true,
-        }
-    }
 
     // Alla määritellään datat kaikkiin luotaviin datasetteihin
     const sector = {
@@ -228,6 +188,13 @@ export default function V9() {
         chart.update();
     }
 
+    function addLabels (value, context) {
+        const text = context.dataset.labels[context.dataIndex];
+        const numbers = context.dataset.data[context.dataIndex];
+        return text + ': ' + numbers + '%';
+        //return text + '\n' + numbers + '%';
+    }
+
     // Funktio, joka ajetaan aina klikatessa
     const onClick = (event) => {
 
@@ -261,14 +228,45 @@ export default function V9() {
             removeData(chart);
             addData(chart, eIndustryData);
         } else {
-            return;
+            //return;
             // Nämä jos laittaa, piirtää ensimmäisen chartin aina, kun klikatusta sektorista ei enempää dataa
-            //removeData(chart);
-            //addData(chart, sector);
+            removeData(chart);
+            addData(chart, sector);
         }
 
         console.log(element);
         console.log(datas);
+    }
+
+    // Data ensimmäisen donitsin piirtämiseen
+    const data = {
+        
+        datasets: [
+            {
+                labels: sectorLabels,
+                data: sectorEmissions,
+                backgroundColor: [
+                    'rgb(128,0,0)',
+                    'rgb(255,140,0)',
+                    'rgb(85,107,47)',
+                    'rgb(107,142,35)',
+                ],
+                parsing: {
+                    key: "emissions"
+                },
+                borderWidth: 3,
+            },
+        ],
+
+    };
+    const options = {
+        plugins: {
+            datalabels: {
+              display: true,
+              color: 'white',
+              formatter: addLabels,
+            }
+          },
     }
 
     // Määritellään, mitä palautetaan sivulle.
