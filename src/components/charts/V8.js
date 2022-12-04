@@ -2037,6 +2037,7 @@ export default function V8() {
             },
             y: {
                 stacked: true,
+                position: "right",
                 title: {
                     display: true,
                     align: 'center',

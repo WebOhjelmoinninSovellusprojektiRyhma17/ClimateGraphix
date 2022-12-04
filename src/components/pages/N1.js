@@ -11,7 +11,6 @@ export default function N1() {
         <>
             <NavBar />
             <V1 />
-            <V8 />
             <V3 />
             <V5 />
             <V7 />
