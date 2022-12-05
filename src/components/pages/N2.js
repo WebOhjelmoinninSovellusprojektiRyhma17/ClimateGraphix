@@ -7,6 +7,7 @@ export default function N2() {
     return (
         <>
             <NavBar />
+            <V8 />
             <V9 />
         </>
     )

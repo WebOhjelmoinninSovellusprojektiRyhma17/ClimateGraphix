@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 function BasicExample() {
   return (
@@ -17,6 +18,11 @@ function BasicExample() {
             <Nav.Link href="/Login">Login</Nav.Link>
             <Nav.Link href="/SignUp">Sign Up</Nav.Link>
           </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            Signed in as: <a href="/login">Username</a>
+          </Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>

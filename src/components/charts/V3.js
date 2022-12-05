@@ -97,6 +97,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
+                hidden: true
             },
             {
                 label: "Ice Core DE08-02",
@@ -108,6 +109,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
+                hidden: true
             },
             {
                 label: "Ice Core DSS",
@@ -119,6 +121,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
+                hidden: true
             },
         ],
     };
@@ -150,7 +153,7 @@ export default function V3() {
 
     return (
         <div className="v2" style={{ width: "100%" }} >
-            <h2>Mauna Loa CO2 measurements and Ice Core measurements</h2>
+            <h2>V3 + V4 Mauna Loa CO2 measurements and Ice Core measurements</h2>
             <Line options={options} data={data} />
             <div>
             <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>

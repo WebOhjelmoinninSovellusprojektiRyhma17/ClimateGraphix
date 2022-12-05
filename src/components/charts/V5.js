@@ -68,7 +68,7 @@ export default function V1() {
 
     return (
         <div className="v1" >
-            <h2>Vostok Ice Core CO2 measurements, 417160 - 2342 years</h2>
+            <h2>V5 Vostok Ice Core CO2 measurements, 417160 - 2342 years</h2>
             <Line options={options} data={data} />
             <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a><br></br>
             <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" >Datasets</a>

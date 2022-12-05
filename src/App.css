@@ -83,12 +83,6 @@ a:hover {
   margin-bottom: 0!important;
 }
 
-#header {
-  height: 260px;
-  width: 100%;
-  background-size: cover;
-}
-
 .notfound {
   padding-top: 15%;
   text-align: center;
