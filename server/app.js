@@ -32,6 +32,7 @@ const NationalCoRouter = require('./routes/NationalCo2');
 const sectorRouter = require('./routes/sector');
 const subsectorRouter = require('./routes/subsector');
 const subsectorfurtherRouter = require('./routes/subsectorfurther');
+const v6Router = require('./routes/v6');
 
 app.use(cors());
 
@@ -64,6 +65,7 @@ app.use('/login', loginRouter);
 app.use('/sector', sectorRouter);
 app.use('/subsector', subsectorRouter);
 app.use('/subsectorfurther', subsectorfurtherRouter);
+app.use('/v6', v6Router);
 
 app.use(authenticateToken);                             //Tämän jälkeen olevat toimivat token autentikoinnilla
 
