@@ -13,6 +13,7 @@ const app = express();
 const vostokRouter = require('./routes/vostok');
 const loginRouter = require('./routes/login');
 const v2Router = require('./routes/v2');
+const createchartRouter = require('./routes/createchart');
 const v71Router = require('./routes/v71');
 const v72Router = require('./routes/v72');
 const usersRouter = require('./routes/users');
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
 app.use('/v2', v2Router);
+app.use('/chart', createchartRouter);
 app.use('/v71', v71Router);
 app.use('/v72', v72Router);
 app.use('/vostok', vostokRouter);

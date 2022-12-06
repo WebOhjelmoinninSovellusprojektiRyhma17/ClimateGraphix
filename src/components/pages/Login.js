@@ -13,12 +13,40 @@ export default function Login() {
     const [uname, setUname] = useState([]);
     const [pword, setPword] = useState([]);
 
+    // Asetetaan viimeinen käyttöpäivä keksille.
+    var expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (1 * 24 * 60 * 60 * 1000));
+
+
+
     const getUserdata = () => {
-        axios.get(`${URL}users/${uname}`)
-            .then((response) => {
-                getUserB(response.data);
-            }).catch(error =>
-                console.error(`Error: ${error}`));
+        //GET pyyntö
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:3001/login', true);
+        xhr.send();
+
+        // Hoitaa vastauksen
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                // Ottaa get pyynnön rungon
+                var response = xhr.responseText;
+
+                // Tarkistaa onko vastaus webtoken
+                var regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/;
+                if (regex.test(response)) {
+                    // Tulostaa webtokenin
+                    console.log(response);
+
+                    //Asetetaan keksille salasana ja käyttäjätunnus
+                    document.cookie = 'username=USERNAME; expires=' + expirationDate.toUTCString();
+                    document.cookie = 'password=PASSWORD; expires=' + expirationDate.toUTCString();
+                    document.cookie = 'token=TOKEN; expires=' + expirationDate.toUTCString();
+                } else {
+                    // Virheestä tulee popup ikkuna ei aina toimi.
+                    window.alert("Invalid credentials");
+                }
+            }
+        }
     }
 
     return (
