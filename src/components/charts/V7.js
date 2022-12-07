@@ -44,8 +44,8 @@ export default function V7() {
                 borderColor: "rgb(0,112,255)",
                 backgroundColor: "rgba(0,112,255, 0.5)",
                 parsing: {
-                    xAxisKey: "date_format(Time, '%Y')",                      // x-akselin muuttuja tietokannassa
-                    yAxisKey: "fifty",                           // y-akselin muuttuja tietokannassa
+                    xAxisKey: "Time (yr BP)",                      // x-akselin muuttuja tietokannassa
+                    yAxisKey: "50 %",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
@@ -56,7 +56,7 @@ export default function V7() {
                 borderColor: "rgb(255,112,0)",
                 backgroundColor: "rgba(255,112,0, 0.5)",
                 parsing: {
-                    xAxisKey: "date_format(Time, '%Y')",                           // x-akselin muuttuja tietokannassa
+                    xAxisKey: "Time",                           // x-akselin muuttuja tietokannassa
                     yAxisKey: "AntarcticTemperatureChange",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
@@ -66,21 +66,10 @@ export default function V7() {
 
     const options = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: "top",
-            },
-            title: {
-                display: true,
-                //text: "Visualisation 1",
-            },
-        },
         scales: {
             x: {
-                type: 'time',
-                time: {
-                    unit: 'year'
-                }
+                type: 'linear',
+                reverse: true,
             },
             v71: {
                 type: "linear",
