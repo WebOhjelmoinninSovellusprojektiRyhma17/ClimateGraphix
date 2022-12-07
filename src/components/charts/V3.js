@@ -6,13 +6,16 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function V3() {
-    const [co2annual, setCo2annual] = useState("");
-    const [co2monthly, setCo2monthly] = useState("");
+    const [co2annual, setCo2annual] = useState([]);
+    const [co2monthly, setCo2monthly] = useState([]);
     const [firstData, setFirstData] = useState([]);
     const [secondData, setSecondData] = useState([]);
     const [thirdData, setThirdData] = useState([]);
+    const [v10, setV10] = useState([]);
 
     const URL = 'http://localhost:3001/'
+
+    const events = v10.map(function (item) { return item.event });
 
     // Hakee tiedot tietokannasta
     const getco2Annual = () => {
@@ -55,12 +58,23 @@ export default function V3() {
                 console.error(`Error: ${error}`));
     }
 
+    const getv10Data = () => {
+        axios.get(`${URL}v10`)
+            .then((response) => {
+                setV10(response.data);
+                
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     useEffect(() => {
         getco2Annual();
         getco2Monthly();
         getFirstData();
         getSecondData();
         getThirdData();
+        getv10Data();
+        console.log(v10);
     }, []);
 
     const data = {
@@ -97,7 +111,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
-                hidden: true
+                //hidden: true
             },
             {
                 label: "Ice Core DE08-02",
@@ -109,7 +123,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
-                hidden: true
+                //hidden: true
             },
             {
                 label: "Ice Core DSS",
@@ -121,7 +135,19 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
-                hidden: true
+                //hidden: true
+            },
+            {
+                label: "human events",
+                data: v10.slice(9, 14),                               
+                borderColor: "rgb(255,215,0)",
+                backgroundColor: "rgba(255,215,0, 0.5)",
+                parsing: {
+                    xAxisKey: "bce",                           
+                    yAxisKey: "hundred",                          
+                },
+                pointRadius: 10,
+                showLine: false,
             },
         ],
     };

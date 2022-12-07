@@ -6,11 +6,12 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function V7() {
-    const [v71, setv71] = useState("");
-    const [v72, setv72] = useState("");
+    const [v71, setv71] = useState([]);
+    const [v72, setv72] = useState([]);
+    const [v10, setV10] = useState([]);
 
     const URL = 'http://localhost:3001/'
-
+    const events = v10.map(function (item) { return item.event });
 
     // Hakee tiedot tietokannasta
     const getv71Data = () => {
@@ -29,37 +30,58 @@ export default function V7() {
                 console.error(`Error: ${error}`));
     }
 
+    const getv10Data = () => {
+        axios.get(`${URL}v10`)
+            .then((response) => {
+                setV10(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     // Kutsuu funktiota aina, kun sivu ladataan
     useEffect(() => {
         getv71Data();
         getv72Data();
+        getv10Data();
     }, []);
 
     const data = {
         datasets: [
             {
-                label: "C02 ppm",
+                label: "Antarctic temperature change",
                 data: v71,                                       // tilamuuttuja, johon data on tallennettu tietokannasta
                 yAxisID: 'v71',
                 borderColor: "rgb(0,112,255)",
                 backgroundColor: "rgba(0,112,255, 0.5)",
                 parsing: {
-                    xAxisKey: "date_format(Time, '%Y')",                      // x-akselin muuttuja tietokannassa
-                    yAxisKey: "fifty",                           // y-akselin muuttuja tietokannassa
+                    xAxisKey: "Time (yr BP)",                      // x-akselin muuttuja tietokannassa
+                    yAxisKey: "50 %",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
             {
-                label: "Antarctic temperature change",
+                label: "CO2 ppm",
                 data: v72,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
                 yAxisID: 'v72',
                 borderColor: "rgb(255,112,0)",
                 backgroundColor: "rgba(255,112,0, 0.5)",
                 parsing: {
-                    xAxisKey: "date_format(Time, '%Y')",                           // x-akselin muuttuja tietokannassa
+                    xAxisKey: "Time",                           // x-akselin muuttuja tietokannassa
                     yAxisKey: "AntarcticTemperatureChange",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
+            },
+            {
+                label: "human events",
+                data: v10,                                
+                borderColor: "rgb(255,215,0)",
+                backgroundColor: "rgba(255,215,0, 0.5)",
+                parsing: {
+                    xAxisKey: "years",                           
+                    yAxisKey: "one",                          
+                },
+                pointRadius: 10,
+                showLine: false,
             },
         ],
     };
@@ -67,28 +89,34 @@ export default function V7() {
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                position: "top",
-            },
-            title: {
-                display: true,
-                //text: "Visualisation 1",
-            },
+            tooltip: {
+    
+            }
         },
         scales: {
             x: {
-                type: 'time',
-                time: {
-                    unit: 'year'
+                type: 'linear',
+                reverse: true,
+                title: {
+                    display: true,
+                    text: 'Time in years BP'
                 }
             },
             v71: {
                 type: "linear",
                 position: "left",
+                title: {
+                    display: true,
+                    text: 'Antarctic temperature change (ºC)'
+                }
             },
             v72: {
                 type: "linear",
                 position: "right",
+                title: {
+                    display: true,
+                    text: 'CO2 ppm'
+                }
             },
         },
     };
