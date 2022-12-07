@@ -70,7 +70,6 @@ export default function V1() {
     const getv2Data = () => {
         axios.get(`${URL}v2`)
             .then((response) => {
-                console.log(response.data);             //Konsoliin tulee tieto palvelimelta voi tarkastaa tiedon POISTETAAN LOPULTA.
                 setv2(response.data);                   //Asetetaan v2 muuttujaan vastauksen data
             }).catch(error =>
                 console.error(`Error: ${error}`));

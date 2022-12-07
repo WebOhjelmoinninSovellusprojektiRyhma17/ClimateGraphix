@@ -10,7 +10,6 @@ router.post('/',
     if(request.body.username && request.body.password){
       const user = request.body.username;
       const pass = request.body.password;
-      
         login.checkPassword(user, function(dbError, dbResult) {
           if(dbError){
             response.json(dbError);

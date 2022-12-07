@@ -9,6 +9,14 @@ import SignUp from './components/pages/SignUp';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
+
+    //Tarkastetaan onko keksi olemassa
+    if (document.cookie.indexOf('username=') !== -1 && document.cookie.indexOf('password=') !== -1) {
+        //Jos keksit on olemassa otetaan talteen käyttäjätunnus ja salasana
+        var username = document.cookie.split('username=')[1].split(';')[0];
+        var password = document.cookie.split('password=')[1].split(';')[0];
+      }
+
     return (
         <>
             <div>
