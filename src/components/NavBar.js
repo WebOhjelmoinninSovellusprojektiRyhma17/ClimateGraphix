@@ -15,13 +15,11 @@ function BasicExample() {
             <Nav.Link href="/">N1</Nav.Link>
             <Nav.Link href="/N2">N2</Nav.Link>
             <Nav.Link href="/N3">N3</Nav.Link>
-            <Nav.Link href="/Login">Login</Nav.Link>
-            <Nav.Link href="/SignUp">Sign Up</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="/login">Username</a>
+            Signed in as: <a href="/loginsignup">Username</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

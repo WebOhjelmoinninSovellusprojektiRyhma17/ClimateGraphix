@@ -2,27 +2,6 @@
   margin-top: 50px;
 }
 
-input[type=text], input[type=password] {
-  display: inline-block;
-  width: 100%;
-  padding: 5px;
-  margin: 5px;
-  margin-left: 0px;
-  margin-right: 0px;
-  background-color: rgb(223, 222, 222);
-}
-
-button[type=submit] {
-  border-radius: 30px;
-  width: 100px;
-  color: hotpink;
-}
-
-#logintitle {
-  margin-top: 50px;
-}
-
-
 div.loginbox {
   display: flex;
   flex-direction: column;
@@ -31,7 +10,6 @@ div.loginbox {
   border-radius: 10px;
   padding: 20px;
   width: 500px;
-  
 }
 
 footer ul {
@@ -45,7 +23,6 @@ footer a {
 }
 
 footer {
-  
   bottom: 0;
   padding-top: 10px;
   width: 100%;
@@ -70,15 +47,6 @@ a:hover {
   color:rgb(0, 0, 0);
 }
 
-a {
-  text-decoration: none;
-  color:#333;
-}
-
-a:hover {
-  color:rgb(0, 0, 0);
-}
-
 #nav {
   margin-bottom: 0!important;
 }
@@ -86,40 +54,6 @@ a:hover {
 .notfound {
   padding-top: 15%;
   text-align: center;
-}
-
-.signup {
-  display: flex;
-  justify-content: center;
-  margin-top: 5rem;
-}
-
-.message {
-  text-align: center;
-  color:rgb(48, 152, 41)
-}
-
-.signup input {
-  display: block;
-  width: 20rem;
-  height: 2rem;
-  padding: 1rem;
-  font-size: 1em;
-  font-weight: 500;
-  margin-bottom: 2rem;
-}
-
-.signup button {
-  border: none;
-  padding: 1rem;
-  width: 20rem;
-  font-size: 1em;
-  border-radius: 0.2rem;
-  cursor: pointer;
-}
-
-.signup button:hover {
-  background-color: #c5c5c5;
 }
 
 .V1 {
@@ -130,4 +64,52 @@ a:hover {
 
 .V9 {
   width: 50%;
+}
+
+.float-container {
+  padding: 1rem;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-left: 5rem;
+}
+
+.float-child {
+  width: 50%;
+  float: left;
+  padding: 2rem;
+  border-left: 0.1rem solid black;
+}  
+
+.float-container input {
+  display: inline-block;
+  width: 25%;
+  height: 3rem;
+  padding: 1rem;
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  background-color: #c5c5c5;
+}
+
+.float-container button {
+  border: none;
+  padding: 1rem;
+  width: 25%;
+  font-size: 1em;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.float-container button:hover {
+  background-color: #c5c5c5;
+}
+
+#logintitle {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.message {
+  padding-left: 1rem;
+  color:rgb(48, 152, 41);
 }
