@@ -1,13 +1,13 @@
 import React from "react";
 
 export default function Footer() {
-    return(
+    return (
         <footer className='footer'>
             <div class="flex-container">
                 <div class="ekapalkki">
                     <ul>
-                    <li>Web sovellusprojekti s2022</li>
-                    <li>Ryhmä 17</li>
+                        <li>Web sovellusprojekti s2022</li>
+                        <li>Ryhmä 17</li>
                     </ul>
                 </div>
                 <div class="link">
@@ -23,8 +23,7 @@ export default function Footer() {
                         <li>Aleksi Siirtola</li>
                     </ul>
                 </div>
-                </div>
-            
+            </div>
         </footer>
     )
 }

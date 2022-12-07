@@ -1,60 +1,46 @@
 import NavBar from "../NavBar";
 import Footer from '../Footer';
-import axios from "axios";
 import { useState } from "react";
-
-
-
-const URL = 'http://localhost:3001/'
+import axios from "axios";
 
 export default function Login() {
 
-    const [userB, getUserB] = useState([]);
+    const url = 'http://localhost:3001/login';
     const [uname, setUname] = useState([]);
     const [pword, setPword] = useState([]);
 
-    // Asetetaan viimeinen käyttöpäivä keksille.
-    var expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + (1 * 24 * 60 * 60 * 1000));
+    function setCookie(token, username) {
 
+        //30min päästä token menee umpeen.
+        var expirationDate = new Date(Date.now() + 30 * 60 * 1000);
 
+        //Annetaan keksille funktion muuttujat ja laitetaan ajaksi 30min jonka jälkeen keksi vanhentuu
+        document.cookie = "token=" + token + ";expires=" + expirationDate.toUTCString();
+        document.cookie = "username=" + username + ";expires=" + expirationDate.toUTCString();
+    }
 
-    const getUserdata = () => {
-        //GET pyyntö
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost:3001/login', true);
-        xhr.send();
+    function handleSubmit() {
+        //Set default headers for Axios
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-        // Hoitaa vastauksen
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                // Ottaa get pyynnön rungon
-                var response = xhr.responseText;
-
-                // Tarkistaa onko vastaus webtoken
-                var regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/;
-                if (regex.test(response)) {
-                    // Tulostaa webtokenin
-                    console.log(response);
-
-                    //Asetetaan keksille salasana ja käyttäjätunnus
-                    document.cookie = 'username=USERNAME; expires=' + expirationDate.toUTCString();
-                    document.cookie = 'password=PASSWORD; expires=' + expirationDate.toUTCString();
-                    document.cookie = 'token=TOKEN; expires=' + expirationDate.toUTCString();
-                } else {
-                    // Virheestä tulee popup ikkuna ei aina toimi.
-                    window.alert("Invalid credentials");
-                }
-            }
-        }
+        //Axios post pyyntö
+        axios.post(url, {
+            username: uname,
+            password: pword
+        })
+            .then(response => {
+                // Tallennetaan web token ja username muuttujaan.
+                setCookie(response.data, uname);
+            })
+            .catch(error => console.error(error));
     }
 
     return (
         <>
             <NavBar />
-            <center><form onSubmit={getUserdata}>
+            <center><form onSubmit={handleSubmit}>
                 <center> <h2 id='logintitle'>Login</h2> </center>
-                <div class='loginbox'>
+                <div className='loginbox'>
                     <input value={uname} type="text" placeholder="Enter Username" onChange={(e) => setUname(e.target.value)} required></input>
                     <input value={pword} type="password" placeholder="Enter Password" onChange={(e) => setPword(e.target.value)} required></input>
                     <button type="submit">Login</button>
