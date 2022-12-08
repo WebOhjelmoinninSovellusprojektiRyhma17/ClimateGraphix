@@ -67,7 +67,7 @@ export default function V7() {
                 backgroundColor: "rgba(255,112,0, 0.5)",
                 parsing: {
                     xAxisKey: "Time",                           // x-akselin muuttuja tietokannassa
-                    yAxisKey: "AntarcticTemperatureChange",                           // y-akselin muuttuja tietokannassa
+                    yAxisKey: "Carbon dioxide (ppm)",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
@@ -106,15 +106,15 @@ export default function V7() {
             },
             v71: {
                 type: "linear",
-                position: "left",
+                position: "right",
                 title: {
                     display: true,
-                    text: 'Antarctic temperature change (ºC)'
+                    text: 'Temperature ºC'
                 }
             },
             v72: {
                 type: "linear",
-                position: "right",
+                position: "left",
                 title: {
                     display: true,
                     text: 'CO2 ppm'
