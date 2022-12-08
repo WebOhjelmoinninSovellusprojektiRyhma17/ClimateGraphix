@@ -28,7 +28,6 @@ export default function V7() {
     const events = v10.map(function (item) { return item.event });
 
     const data = {
-        //labels: events,
         datasets: [
             {
                 label: "Human events",
@@ -41,24 +40,22 @@ export default function V7() {
                 },
                 pointRadius: 10,
                 showLine: false,
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return events[context.dataIndex];
+                        },
+                        title: function (context) {
+                            return '';
+                        }
+                    }
+                }
             },
         ],
     };
 
     const options = {
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        //console.log(context);
-                        return events[context.dataIndex];
-                    },
-                    title: function(context) {
-                        return '';
-                    }
-                }
-            }
-        },
+
         responsive: true,
         scales: {
             x: {
@@ -76,7 +73,7 @@ export default function V7() {
     };
 
     return (
-        <div className="V1" >
+        <div className="V10" >
             <h2>V7 Evolution of global temperature over the past two million years</h2>
             <Line options={options} data={data} />
             <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a><br></br>

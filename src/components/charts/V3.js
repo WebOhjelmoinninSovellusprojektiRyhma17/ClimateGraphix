@@ -16,8 +16,8 @@ export default function V3() {
     const URL = 'http://localhost:3001/'
 
     const events = v10.map(function (item) { return item.event });
-    const parsed = events.slice(9, 14);
-    console.log(parsed);
+    const parsedEvents = events.slice(9, 15);
+    const parsedV10 = v10.slice(9, 15);
 
     // Hakee tiedot tietokannasta
     const getco2Annual = () => {
@@ -142,7 +142,7 @@ export default function V3() {
             },
             {
                 label: "Humans",
-                data: v10.slice(9, 14),                               
+                data: parsedV10,                               
                 borderColor: "rgb(255,215,0)",
                 backgroundColor: "rgba(255,215,0, 0.5)",
                 parsing: {
@@ -151,6 +151,13 @@ export default function V3() {
                 },
                 pointRadius: 10,
                 showLine: false,
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return parsedEvents[context.dataIndex];
+                        },
+                    }
+                }
             },
         ],
     };

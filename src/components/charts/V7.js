@@ -12,6 +12,7 @@ export default function V7() {
 
     const URL = 'http://localhost:3001/'
     const events = v10.map(function (item) { return item.event });
+    console.log(events);
 
     // Hakee tiedot tietokannasta
     const getv71Data = () => {
@@ -73,26 +74,28 @@ export default function V7() {
             },
             {
                 label: "Human events",
-                data: v10,                                
+                data: v10,
                 borderColor: "rgb(255,215,0)",
                 backgroundColor: "rgba(255,215,0, 0.5)",
                 parsing: {
-                    xAxisKey: "years",                           
-                    yAxisKey: "one",                          
+                    xAxisKey: "years",
+                    yAxisKey: "one",
                 },
                 pointRadius: 10,
                 showLine: false,
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return events[context.dataIndex];
+                        },
+                    }
+                }
             },
         ],
     };
 
     const options = {
         responsive: true,
-        plugins: {
-            tooltip: {
-    
-            }
-        },
         scales: {
             x: {
                 type: 'linear',
