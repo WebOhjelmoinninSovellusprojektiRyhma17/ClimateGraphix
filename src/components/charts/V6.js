@@ -41,7 +41,7 @@ export default function V6() {
     };
 
     const options = {    
-        responsive: true,
+        
         plugins: {
             legend: {
                 position: "top",
@@ -49,10 +49,7 @@ export default function V6() {
         },
         scales: {
             x: {
-                reverse: true,
                 type: "linear",
-                max: 800000,
-                min: -2000,
                 title: {
                     display: true,
                     text: 'Years BP'
