@@ -49,9 +49,12 @@ export default function V7() {
         plugins: {
             tooltip: {
                 callbacks: {
+                    label: function(context) {
+                        //console.log(context);
+                        return events[context.dataIndex];
+                    },
                     title: function(context) {
-                        console.log(context);
-                        return events[context[0].dataIndex];
+                        return '';
                     }
                 }
             }
