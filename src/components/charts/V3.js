@@ -16,6 +16,8 @@ export default function V3() {
     const URL = 'http://localhost:3001/'
 
     const events = v10.map(function (item) { return item.event });
+    const parsed = events.slice(9, 14);
+    console.log(parsed);
 
     // Hakee tiedot tietokannasta
     const getco2Annual = () => {
@@ -78,6 +80,7 @@ export default function V3() {
     }, []);
 
     const data = {
+        labels: events,
         datasets: [
             {
                 label: "Co2 annual",
@@ -138,7 +141,7 @@ export default function V3() {
                 //hidden: true
             },
             {
-                label: "human events",
+                label: "Humans",
                 data: v10.slice(9, 14),                               
                 borderColor: "rgb(255,215,0)",
                 backgroundColor: "rgba(255,215,0, 0.5)",
@@ -154,25 +157,24 @@ export default function V3() {
 
     const options = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: "top",
-            },
-            title: {
-                display: true,
-                //text: "Visualisation 1",
-            },
-        },
         scales: {
             x: {
                 type: "time",
                 time: {
                     unit: "month"
+                },
+                title: {
+                    display: true,
+                    text: "Time in years"
                 }
             },
             y: {
                 type: "linear",
                 position: "right",
+                title: {
+                    display: true, 
+                    text: "CO2 Mixing Ratio"
+                }
             },
         },
     };

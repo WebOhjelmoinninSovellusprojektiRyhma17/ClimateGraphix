@@ -72,7 +72,7 @@ export default function V7() {
                 pointRadius: 1,
             },
             {
-                label: "human events",
+                label: "Human events",
                 data: v10,                                
                 borderColor: "rgb(255,215,0)",
                 backgroundColor: "rgba(255,215,0, 0.5)",
