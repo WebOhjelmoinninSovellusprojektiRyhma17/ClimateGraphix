@@ -63,8 +63,7 @@ export default function V3() {
     const getv10Data = () => {
         axios.get(`${URL}v10`)
             .then((response) => {
-                setV10(response.data);
-                
+                setV10(response.data);     
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -76,7 +75,6 @@ export default function V3() {
         getSecondData();
         getThirdData();
         getv10Data();
-        console.log(v10);
     }, []);
 
     const data = {
@@ -141,12 +139,12 @@ export default function V3() {
                 //hidden: true
             },
             {
-                label: "Humans",
+                label: "Humans evolution and activities",
                 data: parsedV10,                               
                 borderColor: "rgb(255,215,0)",
                 backgroundColor: "rgba(255,215,0, 0.5)",
                 parsing: {
-                    xAxisKey: "bce",                           
+                    xAxisKey: "ce",                           
                     yAxisKey: "hundred",                          
                 },
                 pointRadius: 10,
