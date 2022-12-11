@@ -5,6 +5,7 @@ const logger = require('morgan');
 const mysql = require('mysql');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const port = process.env.port || 3001;
 
 //Jokaiselle routes tiedostolle oma
 
