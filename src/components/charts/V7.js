@@ -6,11 +6,12 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function V7() {
-    const [v71, setv71] = useState("");
-    const [v72, setv72] = useState("");
+    const [v71, setv71] = useState([]);
+    const [v72, setv72] = useState([]);
+    const [v10, setV10] = useState([]);
 
     const URL = 'http://localhost:3001/'
-
+    const events = v10.map(function (item) { return item.event });
 
     // Hakee tiedot tietokannasta
     const getv71Data = () => {
@@ -29,72 +30,101 @@ export default function V7() {
                 console.error(`Error: ${error}`));
     }
 
+    const getv10Data = () => {
+        axios.get(`${URL}v10`)
+            .then((response) => {
+                setV10(response.data);
+            }).catch(error =>
+                console.error(`Error: ${error}`));
+    }
+
     // Kutsuu funktiota aina, kun sivu ladataan
     useEffect(() => {
         getv71Data();
         getv72Data();
+        getv10Data();
     }, []);
 
     const data = {
         datasets: [
             {
-                label: "C02 ppm",
+                label: "Antarctic temperature change",
                 data: v71,                                       // tilamuuttuja, johon data on tallennettu tietokannasta
                 yAxisID: 'v71',
                 borderColor: "rgb(0,112,255)",
                 backgroundColor: "rgba(0,112,255, 0.5)",
                 parsing: {
-                    xAxisKey: "date_format(Time, '%Y')",                      // x-akselin muuttuja tietokannassa
+                    xAxisKey: "Time",                      // x-akselin muuttuja tietokannassa
                     yAxisKey: "fifty",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
             },
             {
-                label: "Antarctic temperature change",
+                label: "CO2 ppm",
                 data: v72,                                      // tilamuuttuja, johon data on tallennettu tietokannasta
                 yAxisID: 'v72',
                 borderColor: "rgb(255,112,0)",
                 backgroundColor: "rgba(255,112,0, 0.5)",
                 parsing: {
-                    xAxisKey: "date_format(Time, '%Y')",                           // x-akselin muuttuja tietokannassa
-                    yAxisKey: "AntarcticTemperatureChange",                           // y-akselin muuttuja tietokannassa
+                    xAxisKey: "Time",                           // x-akselin muuttuja tietokannassa
+                    yAxisKey: "Carbon dioxide (ppm)",                           // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
+            },
+            {
+                label: "Humans evolution and activities",
+                data: v10,
+                borderColor: "rgb(255,215,0)",
+                backgroundColor: "rgba(255,215,0, 0.5)",
+                parsing: {
+                    xAxisKey: "years ago",
+                    yAxisKey: "one",
+                },
+                pointRadius: 10,
+                showLine: false,
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return events[context.dataIndex];
+                        },
+                    }
+                }
             },
         ],
     };
 
     const options = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: "top",
-            },
-            title: {
-                display: true,
-                //text: "Visualisation 1",
-            },
-        },
         scales: {
             x: {
-                type: 'time',
-                time: {
-                    unit: 'year'
+                type: 'linear',
+                max: 2022,
+                title: {
+                    display: true,
+                    text: 'Time in years'
                 }
             },
             v71: {
                 type: "linear",
-                position: "left",
+                position: "right",
+                title: {
+                    display: true,
+                    text: 'Temperature ºC'
+                }
             },
             v72: {
                 type: "linear",
-                position: "right",
+                position: "left",
+                title: {
+                    display: true,
+                    text: 'CO2 ppm'
+                }
             },
         },
     };
 
     return (
-        <div className="V1" >
+        <div className="V7" >
             <h2>V7 Evolution of global temperature over the past two million years</h2>
             <Line options={options} data={data} />
             <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a><br></br>

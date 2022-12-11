@@ -13,6 +13,7 @@ const app = express();
 const vostokRouter = require('./routes/vostok');
 const loginRouter = require('./routes/login');
 const v2Router = require('./routes/v2');
+const createchartRouter = require('./routes/createchart');
 const v71Router = require('./routes/v71');
 const v72Router = require('./routes/v72');
 const usersRouter = require('./routes/users');
@@ -33,6 +34,7 @@ const sectorRouter = require('./routes/sector');
 const subsectorRouter = require('./routes/subsector');
 const subsectorfurtherRouter = require('./routes/subsectorfurther');
 const v6Router = require('./routes/v6');
+const v10Router = require('./routes/v10');
 
 app.use(cors());
 
@@ -45,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
 app.use('/v2', v2Router);
+app.use('/chart', createchartRouter);
 app.use('/v71', v71Router);
 app.use('/v72', v72Router);
 app.use('/vostok', vostokRouter);
@@ -66,6 +69,7 @@ app.use('/sector', sectorRouter);
 app.use('/subsector', subsectorRouter);
 app.use('/subsectorfurther', subsectorfurtherRouter);
 app.use('/v6', v6Router);
+app.use('/v10', v10Router);
 
 app.use(authenticateToken);                             //Tämän jälkeen olevat toimivat token autentikoinnilla
 
