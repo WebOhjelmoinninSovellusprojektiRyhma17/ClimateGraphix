@@ -8,7 +8,7 @@ import axios from "axios";
 export default function V1() {
     const [vostok, setvostok] = useState("");
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
 
 
     // Hakee tiedot tietokannasta

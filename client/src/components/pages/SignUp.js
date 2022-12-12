@@ -15,7 +15,7 @@ export default function SignUp() {
         e.preventDefault();
         try {
             //POST palvelimelle jotta saadaan käyttäjätunnukset tietokantaan.
-            let res = await fetch("http://localhost:3001/users", {
+            let res = await fetch(process.env.REACT_APP_API_ADDRESS + '/users', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -12,9 +12,8 @@ export default function V3() {
     const [secondData, setSecondData] = useState([]);
     const [thirdData, setThirdData] = useState([]);
     const [v10, setV10] = useState([]);
-
-    const URL = 'http://localhost:3001/'
-
+    /*
+    const URL = process.env.REACT_APP_API_ADDRESS + '/';
     const events = v10.map(function (item) { return item.event });
     const parsedEvents = events.slice(9, 15);
     const parsedV10 = v10.slice(9, 15);
@@ -183,11 +182,10 @@ export default function V3() {
             },
         },
     };
-
+    */
     return (
         <div className="v2" style={{ width: "100%" }} >
-            <h2>V3 + V4 Mauna Loa CO2 measurements and Ice Core measurements</h2>
-            <Line options={options} data={data} />
+       
             <div>
             <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>
             <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" >Datasource</a>

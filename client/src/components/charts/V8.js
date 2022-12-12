@@ -9,7 +9,7 @@ import autocolors from 'chartjs-plugin-autocolors';
 export default function V8() {
     const [Co, setCo] = useState("");
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
 
     //Chart.register(autocolors);
 

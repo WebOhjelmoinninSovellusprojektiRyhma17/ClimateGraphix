@@ -12,7 +12,7 @@ export default function V9() {
     const [subsectordata, setSubsectordata] = useState([]);
     const [subsectorfurtherdata, setSubsectorfurtherdata] = useState([]);
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
     const chartRef = useRef();
 
     // Hakee tiedot tietokannasta

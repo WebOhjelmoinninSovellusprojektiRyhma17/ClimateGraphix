@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Login() {
 
-    const url = 'http://localhost:3001/login';
+    const url = process.env.REACT_APP_API_ADDRESS + '/login';
     const [uname, setUname] = useState([]);
     const [pword, setPword] = useState([]);
 

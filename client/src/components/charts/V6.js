@@ -8,7 +8,7 @@ import axios from "axios";
 export default function V6() {
     const [v6data, setV6data] = useState("");
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
 
     // Hakee tiedot tietokannasta
     const getData = () => {
