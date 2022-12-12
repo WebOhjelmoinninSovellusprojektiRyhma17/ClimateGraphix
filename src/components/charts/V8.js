@@ -11,8 +11,6 @@ export default function V8() {
 
     const URL = 'http://localhost:3001/'
 
-    //Chart.register(autocolors);
-
     // Hakee tiedot tietokannasta
     const getCoData = () => {
         axios.get(`${URL}NationalCo2`)
@@ -2051,7 +2049,7 @@ export default function V8() {
     return (
         <div className="v8" >
             <h2>V8 Co2 emissions by country</h2>
-            <Line options={options} plugins={autocolors} data={data} />
+            <Line options={options} plugins={[autocolors]} data={data} />
             <a href="https://essd.copernicus.org/articles/14/1917/2022/" target="_blank" >Description</a><br></br>
             <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D" target="_blank" >Datasets</a>
             <p>This graph shows the carbon dioxide emissions by countries from 1959 to 2020.</p>
