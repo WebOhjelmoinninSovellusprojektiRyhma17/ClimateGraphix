@@ -91,7 +91,7 @@ a:hover {
   background-color: #c5c5c5;
 }
 
-.float-container button {
+button {
   border: none;
   padding: 1rem;
   width: 25%;
@@ -100,7 +100,7 @@ a:hover {
   cursor: pointer;
 }
 
-.float-container button:hover {
+button:hover {
   background-color: #c5c5c5;
 }
 
