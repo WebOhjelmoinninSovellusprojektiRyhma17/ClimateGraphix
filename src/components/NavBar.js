@@ -19,7 +19,7 @@ function BasicExample() {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="/loginsignup">Username</a>
+            <a href="/loginsignup">Sign in</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
