@@ -124,11 +124,14 @@ export default function V7() {
     };
 
     return (
-        <div className="V7" >
+        <div className="chart" >
             <h2>V7 Evolution of global temperature over the past two million years</h2>
             <Line options={options} data={data} />
-            <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a><br></br>
-            <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" >Datasets</a>
+            <div>
+                <p> The chart represents global average surface temperature (GAST) over the past 2 million years. The study used a multi-proxy database compilation of over 20,000 sea surface temperature point reconstructions to estimate the GAST, and found that global temperature gradually cooled until roughly 1.2 million years ago and then stalled until the present. The study also found that polar amplification has been stable over time, and that global temperature and atmospheric greenhouse gas concentrations have been closely coupled across glacial cycles. The study estimates that Earth's system sensitivity to greenhouse gases is 9 degrees Celsius per doubling of atmospheric carbon dioxide over millennial timescales.</p>
+            </div>
+                <p><b><a href="https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf" target="_blank" rel="noopener noreferrer">Link to description</a></b></p>
+                <p><b><a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
         </div>
     );
 }

@@ -160,7 +160,7 @@ export default function V9() {
         chart.update();
     }
 
-    function addLabels (value, context) {
+    function addLabels(value, context) {
         const text = context.dataset.labels[context.dataIndex];
         const numbers = context.dataset.data[context.dataIndex];
         return text + ': ' + numbers + '%';
@@ -212,7 +212,7 @@ export default function V9() {
 
     // Data ensimmäisen donitsin piirtämiseen
     const data = {
-        
+
         datasets: [
             {
                 labels: sectorData.map(function (item) { return item.sectorname }),
@@ -234,16 +234,16 @@ export default function V9() {
     const options = {
         plugins: {
             datalabels: {
-              display: true,
-              color: 'white',
-              formatter: addLabels,
+                display: true,
+                color: 'white',
+                formatter: addLabels,
             }
-          },
+        },
     }
 
     // Määritellään, mitä palautetaan sivulle.
     return (
-        <div className="V9">
+        <div className="chart">
             <h2>V9 CO2 emissions by sectors</h2>
             <Doughnut
                 ref={chartRef}
@@ -252,8 +252,11 @@ export default function V9() {
                 options={options}
                 onClick={onClick}
             />
-            <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" >Description</a><br></br>
-            <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" >Datasets</a>
+            <div>
+                <p>The chart shows the breakdown of global greenhouse gas emissions in 2016. Nearly three-quarters of emissions come from energy use, almost one-fifth from agriculture and land use, and the remaining 8% from industry and waste. Energy use in industry, specifically the manufacturing of iron and steel, chemicals and petrochemicals, food and tobacco, non-ferrous metals, paper and pulp, and machinery, accounted for 24.2% of emissions. Road transport accounted for 11.9% and aviation for 2.5%. Agriculture, forestry and other land use accounted for 24.1%, with forestry responsible for 17.4% and agriculture responsible for 6.7%. The remaining 8% of emissions came from industrial processes, waste, and buildings.</p>
+            </div>
+            <p><b><a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" rel="noopener noreferrer">Link to description</a></b></p>
+            <p><b><a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
         </div>
     );
 }

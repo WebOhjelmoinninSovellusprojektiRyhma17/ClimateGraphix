@@ -171,35 +171,38 @@ export default function V1() {
 
     const options = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: "top",
-            },
-            title: {
-                display: true,
-                //text: "Visualisation 1",
-            },
-        },
         scales: {
             x: {
                 type: "time",
                 time: {
                     unit: "month"
+                },
+                title: {
+                    display: true,
+                    text: "Time in Years"
                 }
             },
             y: {
                 type: "linear",
                 position: "right",
-            },
+                title: {
+                    display: true,
+                    text: "Temperature Change (deg C)"
+                }
+            },  
         },
     };
 
     return (
-        <div className="v1" >
-            <h2>V1 + V2 Temperature Anomalies from 1850</h2>
+        <div className="chart">
+            <h2>V1 + V2 Temperature Anomalies from 1850 and Northern Hemisphere 2 000 Year Temperature Reconstruction</h2>
             <Line options={options} data={data} />
-            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >V1 Datasets</a><br></br>
-            <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank" >V2 Datasets</a>
+            <div>
+                <h5>Northern Hemisphere 2,000-year temperature reconstruction : </h5>
+                <p>Reconstruction of the Northern Hemisphere temperatures for the past 2 000 years. The results have been obtained by combining low-resolution proxies with tree-ring data</p>
+            </div>
+            <p><b><a href="https://www.nature.com/articles/nature03265" target="_blank" rel="noopener noreferrer">Link to full study</a></b></p>
+            <p><b><a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" rel="noopener noreferrer">Link to V1 description and dataset</a></b></p>
         </div>
     );
 }

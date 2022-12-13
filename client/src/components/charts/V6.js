@@ -40,8 +40,8 @@ export default function V6() {
         ],
     };
 
-    const options = {    
-        
+    const options = {
+
         plugins: {
             legend: {
                 position: "top",
@@ -52,8 +52,11 @@ export default function V6() {
                 type: "linear",
                 title: {
                     display: true,
-                    text: 'Years BP'
-                }
+                    text: 'Time in Years'
+                },
+                min: -800000,
+                max: 2022
+        
             },
             y: {
                 type: "linear",
@@ -67,11 +70,14 @@ export default function V6() {
     };
 
     return (
-        <div className="v1" >
+        <div className="chart" >
             <h2>V6 Ice core 800k year composite study CO2 measurements</h2>
-            <Line data={data} options={options}/>
-            <a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank" >Description</a><br></br>
-            <a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank" >Dataset</a>
+            <Line data={data} options={options} />
+            <div>
+                <p>The chart represents findings of the European Project for Ice Coring in Antarctica (EPICA) Dome C ice core has allowed for the reconstruction of atmospheric CO2 concentrations for the past 800,000 years. In a recent study of old records have shown an anomaly in the records  The cause of this anomaly is not yet fully understood, but it is thought to be related to insufficient gas extraction in combination with ice relaxation during storage and ice structure. The corrected record partly resolves this issue, but not completely. In the last 10 000 years CO2 levels have been rising drasically in the influence of humans. </p>
+            </div>
+                <p><b><a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank" rel="noopener noreferrer">Link to description</a></b></p>
+                <p><b><a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
         </div>
     );
 }
