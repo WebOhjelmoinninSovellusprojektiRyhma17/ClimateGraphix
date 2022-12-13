@@ -171,15 +171,6 @@ export default function V1() {
 
     const options = {
         responsive: true,
-        plugins: {
-            legend: {
-                position: "top",
-            },
-            title: {
-                display: true,
-                //text: "Visualisation 1",
-            },
-        },
         scales: {
             x: {
                 type: "time",
@@ -195,11 +186,16 @@ export default function V1() {
     };
 
     return (
-        <div className="v1" >
+        <div className="chart">
             <h2>V1 + V2 Temperature Anomalies from 1850</h2>
             <Line options={options} data={data} />
-            <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >V1 Datasets</a><br></br>
-            <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank" >V2 Datasets</a>
+            <h5>Sources : </h5>
+            <div>
+                <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >V1 Datasets</a>
+            </div>
+            <div>
+                <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank" >V2 Datasets</a>
+            </div>
         </div>
     );
 }

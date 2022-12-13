@@ -160,7 +160,7 @@ export default function V9() {
         chart.update();
     }
 
-    function addLabels (value, context) {
+    function addLabels(value, context) {
         const text = context.dataset.labels[context.dataIndex];
         const numbers = context.dataset.data[context.dataIndex];
         return text + ': ' + numbers + '%';
@@ -212,7 +212,7 @@ export default function V9() {
 
     // Data ensimmäisen donitsin piirtämiseen
     const data = {
-        
+
         datasets: [
             {
                 labels: sectorData.map(function (item) { return item.sectorname }),
@@ -234,16 +234,16 @@ export default function V9() {
     const options = {
         plugins: {
             datalabels: {
-              display: true,
-              color: 'white',
-              formatter: addLabels,
+                display: true,
+                color: 'white',
+                formatter: addLabels,
             }
-          },
+        },
     }
 
     // Määritellään, mitä palautetaan sivulle.
     return (
-        <div className="V9">
+        <div className="chart">
             <h2>V9 CO2 emissions by sectors</h2>
             <Doughnut
                 ref={chartRef}
@@ -252,8 +252,13 @@ export default function V9() {
                 options={options}
                 onClick={onClick}
             />
-            <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" >Description</a><br></br>
-            <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" >Datasets</a>
+            <h5>Sources : </h5>
+            <div>
+                <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" >Description</a>
+            </div>
+            <div>
+                <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" >Datasets</a>
+            </div>
         </div>
     );
 }
