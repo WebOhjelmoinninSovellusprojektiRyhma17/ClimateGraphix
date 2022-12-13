@@ -2,13 +2,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 
-function BasicExample() {
+function NavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="/">Web-Sovellusprojekti</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navbar">
@@ -19,7 +18,7 @@ function BasicExample() {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            <a href="/loginsignup">Sign in/Log in</a>
+            <a href="/loginsignup">Login / Sign Up</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
@@ -27,4 +26,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default NavBar;
