@@ -2044,7 +2044,7 @@ export default function V8() {
             <h2>V8 Co2 emissions by country</h2>
             <Line options={options} plugins={[autocolors]} data={data} />
             <div>
-                <p>This graph shows the carbon dioxide emissions by countries from 1959 to 2020.</p>
+                <p>This graph shows the carbon dioxide emissions by countries from 1959 to 2020 .</p>
             </div>
             <h5>Sources : </h5>
             <div>

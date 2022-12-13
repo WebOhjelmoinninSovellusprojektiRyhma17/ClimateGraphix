@@ -1,6 +1,7 @@
-//import axios from 'axios';
+
 import React, { useState } from 'react';
 import NavBar from "../NavBar";
+
 
 
 
@@ -9,6 +10,7 @@ export default function SignUp() {
     var [username, setUsername] = useState("");
     var [password, setPassword] = useState("");
     var [message, setMessage] = useState("");
+
 
     //Kun painetaan rekisteröidy niin lähetetään post
     let handleSubmit = async (e) => {
@@ -26,6 +28,9 @@ export default function SignUp() {
                     password: password,
                 })
             });
+
+
+
             //Ottaa vastauksen ja esittää sen konsolissa.
             let resJson = await res.json();
             console.log(resJson);
