@@ -18,7 +18,7 @@ router.post('/',
             if (dbResult.length > 0) {
               bcrypt.compare(pass,dbResult[0].password, function(err,compareResult) {
                 if(compareResult) {
-                  console.log("success");
+                  console.log("succes");
                   const token = generateAccessToken({ username: user });
                   response.send(token);
                 }
@@ -46,7 +46,7 @@ router.post('/',
 
 function generateAccessToken(username) {
   dotenv.config();
-  return jwt.sign(username, process.env.MY_TOKEN, { expiresIn: '60s' });
+  return jwt.sign(username, process.env.MY_TOKEN, { expiresIn: '1800s' });
 }
 
 module.exports=router;
