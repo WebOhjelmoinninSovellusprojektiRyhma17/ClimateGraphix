@@ -23,7 +23,7 @@ export default function DrawChart() {
         let keys = inputList.map(obj => obj.key).join(".");
 
         axios.post('http://localhost:3001/n3', {
-            user_username: 'root',
+            username: 'root',
             url: randomTag,
             key: keys
         })
