@@ -1,7 +1,6 @@
-
+//import axios from 'axios';
 import React, { useState } from 'react';
 import NavBar from "../NavBar";
-
 
 
 
@@ -10,7 +9,6 @@ export default function SignUp() {
     var [username, setUsername] = useState("");
     var [password, setPassword] = useState("");
     var [message, setMessage] = useState("");
-
 
     //Kun painetaan rekisteröidy niin lähetetään post
     let handleSubmit = async (e) => {
@@ -28,9 +26,6 @@ export default function SignUp() {
                     password: password,
                 })
             });
-
-
-
             //Ottaa vastauksen ja esittää sen konsolissa.
             let resJson = await res.json();
             console.log(resJson);
@@ -51,21 +46,23 @@ export default function SignUp() {
     //Palautetaan form jossa on signup ikkuna
     return (
         <>
-            <NavBar />
-            <div className="signup">
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <input type="text" value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-                    </div>
-                    <div>
-                        <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    </div>
-                    <button>Create user</button>
-                    <div className="message">
-                        {message ? <p>{message}</p> : null}
-                    </div>
-                </form>
-            </div>
+            <form onSubmit={handleSubmit}>
+                <div class='float-child'>
+                        <h2 id='logintitle'>Sign Up</h2>
+                        <div>
+                            <input type="text" value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
+                        </div>
+                        <div>
+                            <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+                        </div>
+                        <div className="message">
+                            {message ? <p>{message}</p> : null}
+                        </div>
+                        <div>
+                        <button>Create user</button>
+                        </div>
+                </div>
+            </form>
         </>
     )
 }

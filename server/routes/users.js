@@ -24,8 +24,6 @@ router.get('/:id?',
 });
 
 
-
-
 router.post('/', 
 function(request, response) {
   user.add(request.body, function(err, dbResult) {
