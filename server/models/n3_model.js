@@ -1,9 +1,11 @@
 const db = require('../database');
 
 const n3={
-    add: function (callback) {
-          return db.query('insert into n3 (url, key) values(?,?)', callback);
+      add: function (user, callback) {
+          return db.query('insert into user (url,keys,user_username) values(?,?,?)',
+            [user.url, user.key, user.user_username], callback);
       },
+
 };
           
-module.exports = login;
+module.exports = n3;

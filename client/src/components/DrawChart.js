@@ -14,30 +14,40 @@ export default function DrawChart() {
 
     const [inputList, setInputList] = useState([]);
 
+    var randomDecimal = Math.random();
+    var random = Math.floor(randomDecimal * 1000);
+    var randomTag = random * random;
+
+
     const toDatabase = () => {
+        let keys = inputList.map(obj => obj.key).join(".");
+
         axios.post('http://localhost:3001/n3', {
-            url: "faofgaagagag",
-            key: inputList
+            user_username: 'root',
+            url: randomTag,
+            key: keys
         })
     }
+
+    const deleteChart = (chartKey) => {
+        setInputList(prev => prev.filter(inputList => inputList.key !== chartKey));
+        console.log(inputList);
+      }
 
     const AddV1 = () => {
         return (
             <>
                 <V1 />
-                <button onClick={deleteChart}> Delete Chart</button>
+                <button onClick={() => deleteChart('1')}> Delete Chart</button>
             </>
         )
     }
-    const deleteChart = () => {
-        let toRemove = '1'
-        setInputList(prev => prev.filter(inputList => inputList !== toRemove));
-        console.log(inputList);
-    }
+
     const AddV3 = event => {
         return (
             <>
                 <V3 />
+                <button onClick={() => deleteChart('2')}> Delete Chart</button>
             </>
         )
     }
@@ -45,6 +55,7 @@ export default function DrawChart() {
         return (
             <>
                 <V5 />
+                <button onClick={() => deleteChart('3')}> Delete Chart</button>
             </>
         )
     }
@@ -52,6 +63,7 @@ export default function DrawChart() {
         return (
             <>
                 <V6 />
+                <button onClick={() => deleteChart('4')}> Delete Chart</button>
             </>
         )
     }
@@ -59,6 +71,7 @@ export default function DrawChart() {
         return (
             <>
                 <V7 />
+                <button onClick={() => deleteChart('5')}> Delete Chart</button>
             </>
         )
     }
@@ -66,6 +79,7 @@ export default function DrawChart() {
         return (
             <>
                 <V8 />
+                <button onClick={() => deleteChart('6')}> Delete Chart</button>
             </>
         )
     }
@@ -73,6 +87,7 @@ export default function DrawChart() {
         return (
             <>
                 <V9 />
+                <button onClick={() => deleteChart('7')}> Delete Chart</button>
             </>
         )
     }
