@@ -1,12 +1,13 @@
 import React from "react";
 import NavBar from "../NavBar";
-import DrawChart from "../DrawChart";
+import CreateChart from "../CreateChart"
 
 export default function N3() {
     return (
         <>
             <NavBar />
-            <DrawChart />
+            <p>N3 page</p>
+            <CreateChart/>
         </>
     )
 }

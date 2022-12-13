@@ -35,7 +35,6 @@ const subsectorRouter = require('./routes/subsector');
 const subsectorfurtherRouter = require('./routes/subsectorfurther');
 const v6Router = require('./routes/v6');
 const v10Router = require('./routes/v10');
-const n3Router = require('./routes/n3');
 
 app.use(cors());
 
@@ -47,7 +46,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Jokaiselle router tiedostolle oma oma
 app.use('/users', usersRouter);
-app.use('/n3', n3Router);
 app.use('/v2', v2Router);
 app.use('/chart', createchartRouter);
 app.use('/v71', v71Router);
