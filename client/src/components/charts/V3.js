@@ -63,7 +63,7 @@ export default function V3() {
     const getv10Data = () => {
         axios.get(`${URL}v10`)
             .then((response) => {
-                setV10(response.data);     
+                setV10(response.data);
             }).catch(error =>
                 console.error(`Error: ${error}`));
     }
@@ -112,7 +112,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
-                //hidden: true
+                hidden: true
             },
             {
                 label: "Ice Core DE08-02",
@@ -124,7 +124,7 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
-                //hidden: true
+                hidden: true
             },
             {
                 label: "Ice Core DSS",
@@ -136,16 +136,16 @@ export default function V3() {
                     yAxisKey: "CO2 Mixing Ratio",                    // y-akselin muuttuja tietokannassa
                 },
                 pointRadius: 1,
-                //hidden: true
+                hidden: true
             },
             {
                 label: "Humans evolution and activities",
-                data: parsedV10,                               
+                data: parsedV10,
                 borderColor: "rgb(255,215,0)",
                 backgroundColor: "rgba(255,215,0, 0.5)",
                 parsing: {
-                    xAxisKey: "ce",                           
-                    yAxisKey: "hundred",                          
+                    xAxisKey: "ce",
+                    yAxisKey: "hundred",
                 },
                 pointRadius: 10,
                 showLine: false,
@@ -155,7 +155,8 @@ export default function V3() {
                             return parsedEvents[context.dataIndex];
                         },
                     }
-                }
+                },
+                hidden: true
             },
         ],
     };
@@ -177,7 +178,7 @@ export default function V3() {
                 type: "linear",
                 position: "right",
                 title: {
-                    display: true, 
+                    display: true,
                     text: "CO2 Mixing Ratio"
                 }
             },
@@ -185,21 +186,24 @@ export default function V3() {
     };
 
     return (
-        <div className="v2" style={{ width: "100%" }} >
+        <div className="chart">
             <h2>V3 + V4 Mauna Loa CO2 measurements and Ice Core measurements</h2>
             <Line options={options} data={data} />
             <div>
-            <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>
-            <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" >Datasource</a>
+                <p>Tähän tulee joskus vielä lyhyt ja ytimekäs teksti, joka kertoo kuvaajasta</p>
+            </div>
+            <h5>Sources : </h5>
+            <div>
+                <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" >Datasource</a>
             </div>
             <div>
-            <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" >Data measurement</a>
+                <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" >Data measurement</a>
             </div>
             <div>
-            <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" >Ice Core description</a>
+                <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" >Ice Core description</a>
             </div>
             <div>
-            <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" >Ice Core dataset</a>
+                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" >Ice Core dataset</a>
             </div>
         </div>
     );

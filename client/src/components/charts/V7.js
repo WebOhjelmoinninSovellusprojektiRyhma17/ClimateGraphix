@@ -124,11 +124,16 @@ export default function V7() {
     };
 
     return (
-        <div className="V7" >
+        <div className="chart" >
             <h2>V7 Evolution of global temperature over the past two million years</h2>
             <Line options={options} data={data} />
-            <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a><br></br>
-            <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" >Datasets</a>
+            <h5>Sources : </h5>
+            <div>
+                <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a>
+            </div>
+            <div>
+                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" >Datasets</a>
+            </div>
         </div>
     );
 }

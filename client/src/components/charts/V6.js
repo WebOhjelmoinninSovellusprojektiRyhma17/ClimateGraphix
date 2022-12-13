@@ -40,8 +40,8 @@ export default function V6() {
         ],
     };
 
-    const options = {    
-        
+    const options = {
+
         plugins: {
             legend: {
                 position: "top",
@@ -53,7 +53,9 @@ export default function V6() {
                 title: {
                     display: true,
                     text: 'Years BP'
-                }
+                },
+                min: -800000,
+                max: 2022
             },
             y: {
                 type: "linear",
@@ -67,11 +69,16 @@ export default function V6() {
     };
 
     return (
-        <div className="v1" >
+        <div className="chart" >
             <h2>V6 Ice core 800k year composite study CO2 measurements</h2>
-            <Line data={data} options={options}/>
-            <a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank" >Description</a><br></br>
-            <a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank" >Dataset</a>
+            <Line data={data} options={options} />
+            <h5>Sources : </h5>
+            <div>
+                <a href="https://www.ncei.noaa.gov/access/paleo-search/study/17975" target="_blank" >Description</a>
+            </div>
+            <div>
+                <a href="https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank" >Dataset</a>
+            </div>
         </div>
     );
 }
