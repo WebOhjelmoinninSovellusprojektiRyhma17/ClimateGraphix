@@ -54,7 +54,7 @@ export default function V6() {
                     display: true,
                     text: 'Years BP'
                 },
-                min: -80000,
+                min: -800000,
                 max: 2022
         
             },
