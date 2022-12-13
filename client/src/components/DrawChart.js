@@ -13,9 +13,13 @@ import V9 from "./charts/V9";
 export default function DrawChart() {
 
     const [inputList, setInputList] = useState([]);
+    const [key, setKey] = useState(true);
+
+    useEffect(() => {
+        console.log(inputList);
+    }, [])
 
     const AddV1 = event => {
-        console.log("Add v1 clicked");
         return <V1 />;
     }
     const AddV3 = event => {
@@ -38,31 +42,123 @@ export default function DrawChart() {
     }
 
     const onAddV1Click = event => {
-        setInputList(inputList.concat(<AddV1 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '1') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");
+        } else {
+            setInputList(inputList.concat(<AddV1 key='1' />));
+            console.log(inputList);
+        }
+
     };
 
     const onAddV3Click = event => {
-        setInputList(inputList.concat(<AddV3 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '2') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");
+        } else {
+            setInputList(inputList.concat(<AddV3 key='2' />));
+            console.log(inputList);
+        }
     };
 
     const onAddV5Click = event => {
-        setInputList(inputList.concat(<AddV5 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '3') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");  
+        } else {
+            setInputList(inputList.concat(<AddV5 key='3' />));
+            console.log(inputList);
+        }
     };
 
     const onAddV6Click = event => {
-        setInputList(inputList.concat(<AddV6 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '4') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");  
+        } else {
+            setInputList(inputList.concat(<AddV6 key='4' />));
+            console.log(inputList);
+        }
     };
 
     const onAddV7Click = event => {
-        setInputList(inputList.concat(<AddV7 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '5') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");
+        } else {
+            setInputList(inputList.concat(<AddV7 key='5' />));
+            console.log(inputList);
+        }
     };
 
     const onAddV8Click = event => {
-        setInputList(inputList.concat(<AddV8 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '6') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");
+        } else {
+            setInputList(inputList.concat(<AddV8 key='6' />));
+            console.log(inputList);
+        }
     };
 
     const onAddV9Click = event => {
-        setInputList(inputList.concat(<AddV9 key={inputList.length} />));
+        let exists = inputList.some(element => {
+            if (element.key === '7') {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
+        if (exists) {
+            console.log("Key found");
+        } else {
+            setInputList(inputList.concat(<AddV9 key='7' />));
+            console.log(inputList);
+        }
     };
 
     return (
