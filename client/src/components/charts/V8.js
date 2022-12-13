@@ -2046,13 +2046,8 @@ export default function V8() {
             <div>
                 <p>This graph shows the carbon dioxide emissions by countries from 1959 to 2020 .</p>
             </div>
-            <h5>Sources : </h5>
-            <div>
-                <a href="https://essd.copernicus.org/articles/14/1917/2022/" target="_blank" >Description</a>
-            </div>
-            <div>
-                <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D" target="_blank" >Datasets</a>
-            </div>
+                <p><b><a href="https://essd.copernicus.org/articles/14/1917/2022/" target="_blank" rel="noopener noreferrer" >Link to description</a></b></p>
+                <p><b><a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D" target="_blank" rel="noopener noreferrer" >Link to datasource</a></b></p>
         </div>
     );
 }

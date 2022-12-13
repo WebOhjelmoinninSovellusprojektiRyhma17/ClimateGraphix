@@ -64,13 +64,8 @@ export default function V1() {
             <div>
                 <p>A collaborative ice-drilling project between Russia, the United States, and France at the Russian Vostok station in East Antarctica yielded the deepest ice core ever recovered, reaching a depth of 3,623 meters. The Vostok ice-core record extends through four climate cycles and is slightly older than 400,000 years. The ice core's entrapped air inclusions enable a direct record of past changes in atmospheric trace-gas composition. The Vostok ice core data showed a close correlation between Antarctic temperature and atmospheric concentrations of CO2. The extension of the Vostok CO2 record showed that CO2 levels have been rising and decending over hundreds of thousands of years ago. Still the present-day levels of CO2 are unprecedented during the past 420,000 years.</p>
             </div>
-            <h5>Sources : </h5>
-            <div>
-                <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" >Description</a>
-            </div>
-            <div>
-                <a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" >Datasets</a>
-            </div>
+            <p><b><a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" target="_blank" rel="noopener noreferrer">Link to description</a></b></p>
+            <p><b><a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
         </div>
     );
 }

@@ -201,8 +201,8 @@ export default function V1() {
                 <h5>Northern Hemisphere 2,000-year temperature reconstruction : </h5>
                 <p>Reconstruction of the Northern Hemisphere temperatures for the past 2 000 years. The results have been obtained by combining low-resolution proxies with tree-ring data</p>
             </div>
-            <p><b><a href="https://www.nature.com/articles/nature03265" target="_blank" >Link to full study</a></b></p>
-            <p><b><a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Link to V1 description and dataset</a></b></p>
+            <p><b><a href="https://www.nature.com/articles/nature03265" target="_blank" rel="noopener noreferrer">Link to full study</a></b></p>
+            <p><b><a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" rel="noopener noreferrer">Link to V1 description and dataset</a></b></p>
         </div>
     );
 }

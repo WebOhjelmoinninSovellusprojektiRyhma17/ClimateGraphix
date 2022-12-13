@@ -252,16 +252,11 @@ export default function V9() {
                 options={options}
                 onClick={onClick}
             />
-            <h5>Sources : </h5>
             <div>
                 <p>The chart shows the breakdown of global greenhouse gas emissions in 2016. Nearly three-quarters of emissions come from energy use, almost one-fifth from agriculture and land use, and the remaining 8% from industry and waste. Energy use in industry, specifically the manufacturing of iron and steel, chemicals and petrochemicals, food and tobacco, non-ferrous metals, paper and pulp, and machinery, accounted for 24.2% of emissions. Road transport accounted for 11.9% and aviation for 2.5%. Agriculture, forestry and other land use accounted for 24.1%, with forestry responsible for 17.4% and agriculture responsible for 6.7%. The remaining 8% of emissions came from industrial processes, waste, and buildings.</p>
             </div>
-            <div>
-                <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" >Description</a>
-            </div>
-            <div>
-                <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" >Datasets</a>
-            </div>
+            <p><b><a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector" target="_blank" rel="noopener noreferrer">Link to description</a></b></p>
+            <p><b><a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
         </div>
     );
 }
