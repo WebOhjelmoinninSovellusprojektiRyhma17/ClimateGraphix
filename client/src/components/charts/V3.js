@@ -194,22 +194,22 @@ export default function V3() {
                 <p>Shows CO2 measurements in Mauna Loa Observaroty in Hawaii starting from March of 1958. Orange line represent the monthly values that are calculated as average from daily means.
                     Red line represent the same, after correction for the average seasonal cycle. </p>
             </div>
-            <p><b><a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" >Link to description</a></b></p>
-            <p><b><a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" >Link to datasource</a></b></p>
+            <p><b><a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html" target="_blank" rel="noopener noreferrer">Link to description</a></b></p>
+            <p><b><a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
             <div>
                 <h5>Antarctic Ice Core Records :</h5>
                 <p>Represent records of CO2 mixing ratios from three different ice cores from Law Dome, Antarctica from 1006 B.C. to 1978 B.C. </p>
             </div>
             <div>
-                <p><b><a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" >Links to description</a></b></p>
-                <p><b><a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" >Link to datasource</a></b></p>
+                <p><b><a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html" target="_blank" rel="noopener noreferrer">Links to description</a></b></p>
+                <p><b><a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
             </div>
             <div>
-                <h5>Human Evolution and Activities</h5>
+                <h5>Human Evolution and Activities :</h5>
                 <p>Yellow dots show single activities in human history that could have influenced the progression of climate change. By hovering over the dots you can see information about the event.  </p>
             </div>
             <div>
-                <p><b><a href="https://www.southampton.ac.uk/~cpd/history.html" target="_blank" >Link to datasource</a></b></p>
+                <p><b><a href="https://www.southampton.ac.uk/~cpd/history.html" target="_blank" rel="noopener noreferrer">Link to datasource</a></b></p>
             </div>
         </div>
     );
