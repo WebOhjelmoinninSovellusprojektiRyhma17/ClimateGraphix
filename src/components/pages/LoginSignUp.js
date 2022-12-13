@@ -15,7 +15,6 @@ export default function LoginSignUp() {
                 <Login />
                 <SignUp />
                 <DeleteUser />
-                <LogoutUser />
             </div>
         </>
     )

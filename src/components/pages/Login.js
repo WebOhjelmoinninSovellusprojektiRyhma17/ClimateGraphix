@@ -23,15 +23,20 @@ export default function Login() {
         })
             .then(response => {
 
-                console.log(response);
                 sessionStorage.setItem('username', uname);
                 sessionStorage.setItem('token', response.data);
                 
-                //setUsername("");
-                //setPassword("");
+                /*if (sessionStorage.key("token") = "false") {
+                    setMessage("Something went wrong")
+                    sessionStorage.clear("username");
+                    sessionStorage.clear("token");
+                } */
+                setUsername("");
+                setPassword("");
+                setMessage("Login successful");
                 
             })
-            .catch(error => console.error(error));
+            .catch((error => console.error(error)));
     }
 
     return (
@@ -44,6 +49,9 @@ export default function Login() {
                         </div>
                         <div>
                             <input value={pword} type="password" placeholder="Password" onChange={(e) => setPword(e.target.value)} required></input>
+                        </div>
+                        <div className="message">
+                            {message ? <p>{message}</p> : null}
                         </div>
                         <button type="submit">Login</button>
                     </div>
