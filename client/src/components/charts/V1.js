@@ -176,39 +176,33 @@ export default function V1() {
                 type: "time",
                 time: {
                     unit: "month"
+                },
+                title: {
+                    display: true,
+                    text: "Time in Years"
                 }
             },
             y: {
                 type: "linear",
                 position: "right",
-            },
+                title: {
+                    display: true,
+                    text: "Temperature Change (deg C)"
+                }
+            },  
         },
     };
 
     return (
         <div className="chart">
-            <h2>Global historical surface temperature anomalies from January 1850 onwards and Northern Hemisphere 2,000-year temperature reconstruction</h2>
+            <h2>V1 + V2 Temperature Anomalies from 1850 and Northern Hemisphere 2 000 Year Temperature Reconstruction</h2>
             <Line options={options} data={data} />
             <div>
-                <h5>HadCRUT5</h5>
-                <p>HadCRUT5 is a gridded dataset of global historical surface temperature anomalies relative to a 1961-1990 reference period.
-                Data are available for each month from January 1850 onwards, on a 5 degree grid and as global and regional average time series.
-                The dataset is a collaborative product of the Met Office Hadley Centre and the Climatic Research Unit at the University of East Anglia.</p>
+                <h5>Northern Hemisphere 2,000-year temperature reconstruction : </h5>
+                <p>Reconstruction of the Northern Hemisphere temperatures for the past 2 000 years. The results have been obtained by combining low-resolution proxies with tree-ring data</p>
             </div>
-            <div>
-                <h5>Highly variable Northern Hemisphere temperatures reconstructed from low- and high-resolution proxy data</h5>
-                <p>
-                Northern Hemisphere temperature reconstruction for the past 2,000 years by combining low-resolution proxies with tree-ring data, using a wavelet transform technique to achieve timescale-dependent processing of the data.
-                </p>
-                <p><b><a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Link for the full study</a></b></p>
-            </div>
-            <h5>Data sources : </h5>
-            <div>
-                <a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >HadCRUT5</a>
-            </div>
-            <div>
-                <a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt" target="_blank" >V2 Datasets</a>
-            </div>
+            <p><b><a href="https://www.nature.com/articles/nature03265" target="_blank" >Link to full study</a></b></p>
+            <p><b><a href="https://www.metoffice.gov.uk/hadobs/hadcrut5/" target="_blank" >Link to V1 description and dataset</a></b></p>
         </div>
     );
 }
