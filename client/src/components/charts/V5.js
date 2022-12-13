@@ -47,11 +47,19 @@ export default function V1() {
             x: {
                 reverse: true,
                 type: "linear",
+                title: {
+                    display: true,
+                    text: 'Time in Years'
+                },
                 max: 420000,
                 min: 0
             },
             y: {
                 type: "linear",
+                title: {
+                    display: true,
+                    text: 'CO2 concentration'
+                },
                 position: "right",
             },
         },
