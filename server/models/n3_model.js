@@ -12,10 +12,8 @@ const n3 = {
             [user.url, user.key, user.username], callback);
     },
     delete: function (id, callback) {
-        return db.query('delete from n3 where url=?', [id], callback);
+        return db.query('delete from n3 where username=?', [id], callback);
     },
-
-
 };
 
 module.exports = n3;

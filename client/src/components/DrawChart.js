@@ -14,16 +14,18 @@ export default function DrawChart() {
 
     const [inputList, setInputList] = useState([]);
 
-    var randomDecimal = Math.random();
-    var random = Math.floor(randomDecimal * 1000);
-    var randomTag = random * random;
+    
 
 
     const toDatabase = () => {
         let keys = inputList.map(obj => obj.key).join(".");
 
+        var randomDecimal = Math.random();
+        var random = Math.floor(randomDecimal * 1000);
+        var randomTag = random * random;
+
         axios.post('http://localhost:3001/n3', {
-            username: 'root',
+            username: sessionStorage.getItem('username'),
             url: randomTag,
             key: keys
         })

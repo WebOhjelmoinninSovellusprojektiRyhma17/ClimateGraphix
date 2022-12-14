@@ -24,6 +24,5 @@ const user = {
         [user.username, hash, id], callback);
     });
   }
-
 }
 module.exports = user;
