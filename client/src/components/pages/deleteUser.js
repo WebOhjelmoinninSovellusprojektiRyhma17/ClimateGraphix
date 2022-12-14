@@ -4,22 +4,25 @@ import { useState } from "react";
 
 export default function DeleteUser() {
 
-    URL = process.env.REACT_APP_API_ADDRESS + '/users/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/users/'
 
     var [message, setMessage] = useState([]);
 
     function handleDeleteSubmit() {
-        var name = "";
-        var tokeni = "";
-        var name = sessionStorage.getItem('username');
-        var tokeni = sessionStorage.getItem('token');
-        axios.delete((URL+name), {
+        let name = "";
+        let tokeni = "";
+
+        name = sessionStorage.getItem('username');
+        tokeni = sessionStorage.getItem('token');
+
+        axios.delete((URL + name), {
             headers: {
                 Authorization: `Bearer ${tokeni}`
-              }});
-                setMessage("User deleted");
-                sessionStorage.removeItem('token')
-                sessionStorage.removeItem('username')
+            }
+        });
+        setMessage("User deleted");
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('username')
     };
 
     return (
@@ -27,10 +30,10 @@ export default function DeleteUser() {
             <div class='float-child'>
                 <h2>Delete user</h2>
                 <div>
-                    <label className='delete'for="delete" > This function deletes your user permanently</label>
+                    <label className='delete' for="delete" > This function deletes your user permanently</label>
                 </div>
                 <div className="message">
-                            {message ? <p>{message}</p> : null}
+                    {message ? <p>{message}</p> : null}
                 </div>
                 <button type="submit">Delete user</button>
             </div>
