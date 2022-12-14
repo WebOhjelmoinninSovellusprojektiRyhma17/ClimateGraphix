@@ -8,11 +8,18 @@ export default function Login() {
     const url = 'http://localhost:3001/login';
     const [uname, setUname] = useState([]);
     const [pword, setPword] = useState([]);
-    var [username, setUsername] = useState([]);
-    var [password, setPassword] = useState([]);
-    var [message, setMessage] = useState([]);
 
-    function handleLoginSubmit() {
+    function setCookie(token, username) {
+
+        //30min päästä token menee umpeen.
+        var expirationDate = new Date(Date.now() + 30 * 60 * 1000);
+
+        //Annetaan keksille funktion muuttujat ja laitetaan ajaksi 30min jonka jälkeen keksi vanhentuu
+        document.cookie = "token=" + token + ";expires=" + expirationDate.toUTCString();
+        document.cookie = "username=" + username + ";expires=" + expirationDate.toUTCString();
+    }
+
+    function handleSubmit() {
         //Set default headers for Axios
         axios.defaults.headers.common['Content-Type'] = 'application/json';
 
@@ -41,7 +48,7 @@ export default function Login() {
 
     return (
         <>
-            <form onSubmit={handleLoginSubmit}>
+            <form onSubmit={handleSubmit}>
                     <div class='float-child'>
                         <h2 id='logintitle'>Login</h2>
                         <div>

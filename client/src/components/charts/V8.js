@@ -2014,6 +2014,11 @@ export default function V8() {
                 type: "time",
                 time: {
                     unit: "year"
+                },
+                title:{
+                    display: true,
+                    align: 'center',
+                    text:"Time in years"
                 }
             },
             y: {
@@ -2034,7 +2039,7 @@ export default function V8() {
             <h2>V8 Co2 emissions by country</h2>
             <Line options={options} plugins={[autocolors]} data={data} />
             <div>
-                <p>This graph shows the carbon dioxide emissions by countries from 1959 to 2020 .</p>
+                <p>This graph shows the carbon dioxide emissions by countries from 1959 to 2020. Most countries CO2 emissions have risen steadily over the years but there are a few outstanding countries such as China and the USA which have always been above others. There are a few notable dips in emissions such as 2009 when the USA housing market crash happened and 2019 when Covid-19 started.</p>
             </div>
             <p><b><a href="https://essd.copernicus.org/articles/14/1917/2022/" target="_blank" rel="noopener noreferrer" >Link to description</a></b></p>
             <p><b><a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D" target="_blank" rel="noopener noreferrer" >Link to datasource</a></b></p>
