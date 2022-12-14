@@ -4,15 +4,15 @@ import { useState } from "react";
 
 export default function DeleteUser() {
 
-    URL = `http://localhost:3001/users/`
+    const URL = `http://localhost:3001/users/`
 
-    var [message, setMessage] = useState([]);
+    const [message, setMessage] = useState([]);
 
     function handleDeleteSubmit() {
-        var name = "";
-        var tokeni = "";
-        var name = sessionStorage.getItem('username');
-        var tokeni = sessionStorage.getItem('token');
+        let name = "";
+        let tokeni = "";
+        name = sessionStorage.getItem('username');
+        tokeni = sessionStorage.getItem('token');
         axios.delete((URL+name), {
             headers: {
                 Authorization: `Bearer ${tokeni}`
