@@ -1,9 +1,4 @@
-
 import React, { useState } from 'react';
-import NavBar from "../NavBar";
-
-
-
 
 export default function SignUp() {
     //Muuttujat, joihin tallennetaan username ja password sekä message, joka tulostuu, kun nappia painetaan
@@ -53,19 +48,19 @@ export default function SignUp() {
         <>
             <form onSubmit={handleSubmit}>
                 <div class='float-child'>
-                        <h2 id='logintitle'>Sign Up</h2>
-                        <div>
-                            <input type="text" value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
-                        </div>
-                        <div>
-                            <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
-                        </div>
-                        <div className="message">
-                            {message ? <p>{message}</p> : null}
-                        </div>
-                        <div>
+                    <h2 id='logintitle'>Sign Up</h2>
+                    <div>
+                        <input type="text" value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} required />
+                    </div>
+                    <div>
+                        <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    <div className="message">
+                        {message ? <p>{message}</p> : null}
+                    </div>
+                    <div>
                         <button>Create user</button>
-                        </div>
+                    </div>
                 </div>
             </form>
         </>
