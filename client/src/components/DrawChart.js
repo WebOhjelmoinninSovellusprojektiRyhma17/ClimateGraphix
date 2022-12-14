@@ -24,7 +24,7 @@ export default function DrawChart() {
         var random = Math.floor(randomDecimal * 1000);
         var randomTag = random * random;
 
-        axios.post('http://localhost:3001/n3', {
+        axios.post(process.env.REACT_APP_API_ADDRESS + '/n3', {
             username: sessionStorage.getItem('username'),
             url: randomTag,
             key: keys
@@ -216,13 +216,13 @@ export default function DrawChart() {
 
     return (
         <>
-            <button onClick={onAddV1Click}>Add V1 + V2 data</button>
-            <button onClick={onAddV3Click}>Add V3 + V4 data</button>
-            <button onClick={onAddV5Click}>Add V5 data</button>
-            <button onClick={onAddV6Click}>Add V6 data</button>
-            <button onClick={onAddV7Click}>Add V7 data</button>
-            <button onClick={onAddV8Click}>Add V8 data</button>
-            <button onClick={onAddV9Click}>Add V9 data</button>
+            <button onClick={onAddV1Click}>Show V1 + V2 data</button>
+            <button onClick={onAddV3Click}>Show V3 + V4 data</button>
+            <button onClick={onAddV5Click}>Show V5 data</button>
+            <button onClick={onAddV6Click}>Show V6 data</button>
+            <button onClick={onAddV7Click}>Show V7 data</button>
+            <button onClick={onAddV8Click}>Show V8 data</button>
+            <button onClick={onAddV9Click}>Show V9 data</button>
             <button onClick={toDatabase}>Save to database</button>
             {inputList}
         </>

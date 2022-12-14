@@ -10,7 +10,7 @@ export default function V7() {
     const [v72, setv72] = useState([]);
     const [v10, setV10] = useState([]);
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
     const events = v10.map(function (item) { return item.event });
 
     // Hakee tiedot tietokannasta

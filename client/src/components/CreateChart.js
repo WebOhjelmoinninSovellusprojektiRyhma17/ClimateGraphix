@@ -23,7 +23,7 @@ export default function Footer() {
           
             // Create an XMLHttpRequest to send the POST request
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:3001/chart', true);
+            xhr.open('POST', process.env.REACT_APP_API_ADDRESS + '/chart', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(checkboxValues));
           
