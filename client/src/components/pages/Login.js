@@ -8,16 +8,7 @@ export default function Login() {
     const url = 'http://localhost:3001/login';
     const [uname, setUname] = useState([]);
     const [pword, setPword] = useState([]);
-
-    function setCookie(token, username) {
-
-        //30min päästä token menee umpeen.
-        var expirationDate = new Date(Date.now() + 30 * 60 * 1000);
-
-        //Annetaan keksille funktion muuttujat ja laitetaan ajaksi 30min jonka jälkeen keksi vanhentuu
-        document.cookie = "token=" + token + ";expires=" + expirationDate.toUTCString();
-        document.cookie = "username=" + username + ";expires=" + expirationDate.toUTCString();
-    }
+    const [message, setMessage] = useState([]);
 
     function handleSubmit() {
         //Set default headers for Axios
@@ -38,8 +29,8 @@ export default function Login() {
                     sessionStorage.clear("username");
                     sessionStorage.clear("token");
                 } */
-                setUsername("");
-                setPassword("");
+                //setUsername("");
+                //setPassword("");
                 setMessage("Login successful");
                 
             })

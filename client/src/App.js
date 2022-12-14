@@ -5,11 +5,13 @@ import N2 from './components/pages/N2';
 import N3 from './components/pages/N3';
 import LoginSignUp from './components/pages/LoginSignUp';
 import { Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
 
 function App() {
     return (
         <>
+            <NavBar />
             <div>
                 <Routes>
                     <Route path="/" element={<N1 />} />
