@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function DeleteUser() {
 
-    URL = `http://localhost:3001/users/`
+    URL = process.env.REACT_APP_API_ADDRESS + '/users/'
 
     var [message, setMessage] = useState([]);
 

@@ -13,7 +13,7 @@ export default function V3() {
     const [thirdData, setThirdData] = useState([]);
     const [v10, setV10] = useState([]);
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
 
     const events = v10.map(function (item) { return item.event });
     const parsedEvents = events.slice(9, 15);

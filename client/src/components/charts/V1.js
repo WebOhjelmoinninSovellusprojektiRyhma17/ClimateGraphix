@@ -14,7 +14,7 @@ export default function V1() {
     const [southM, setSouthM] = useState("");
     const [v2, setv2] = useState("");
 
-    const URL = 'http://localhost:3001/'
+    const URL = process.env.REACT_APP_API_ADDRESS + '/'
 
     // Hakee tiedot tietokannasta
     const getGlobalData = () => {

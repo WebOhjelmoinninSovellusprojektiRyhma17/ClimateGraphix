@@ -24,7 +24,7 @@ export default function DrawChart() {
         var random = Math.floor(randomDecimal * 1000);
         var randomTag = random * random;
 
-        axios.post('http://localhost:3001/n3', {
+        axios.post(process.env.REACT_APP_API_ADDRESS + '/n3', {
             username: sessionStorage.getItem('username'),
             url: randomTag,
             key: keys
