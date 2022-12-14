@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/user_model');
+const n3 = require('../models/n3_model')
 
 router.get('/:id?',
  function(request, response) {
@@ -44,6 +45,9 @@ function(request, response) {
     if (err) {
       response.json(err);
     } else {
+      n3.delete(request.params.id, function(err,dbResult) {
+  
+      });
       response.json(dbResult);
     }
   });
