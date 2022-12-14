@@ -25,7 +25,7 @@ export default function DeleteUser() {
     return (
         <form onSubmit={handleDeleteSubmit}>
             <div class='float-child'>
-                <h2 id="logintitle">Delete user</h2>
+                <h2>Delete user</h2>
                 <div>
                     <label className='delete'for="delete" > This function deletes your user permanently</label>
                 </div>
