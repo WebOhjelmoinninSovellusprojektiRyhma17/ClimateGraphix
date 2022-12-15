@@ -7,7 +7,7 @@ Projektia olivat tekemässä Onni Hietanen, Erika Korhonen, Johannes Huttunen se
 Tämä projekti on Oulun ammattikorkeakoulun 2. vuoden opiskelijoiden opintoihin sisältyvä web-ohjelmoinnin sovellusprojekti. Projektissa teimme web-sovelluksen, jonka avulla voidaan tarkastella erilaisia lämpötila- ja päästötietoja menneiltä vuosilta. Käyttäjä voi luoda sovellukseen oman käyttäjän sekä kirjautua käyttäjänimellä ja salasanalla. Käyttäjän voi myös halutessaan poistaa käyttäjänsä. Viimeiselle sivulle käyttäjä voi luoda omia visualisointeja ja tallentaa ne tietokantaan.  
 
 Emme määritelleet projektissa erikseen tarkkoja rooleja, vaan projektissa kaikki työskentelivät Full Stack -kehittäjinä eli sekä clientin että serverin parissa. 
-
+![Kuva](https://1drv.ms/u/s!AuruAYimGtYVprdKommLqQFW1ZgrVg?e=60QA4y)
 
 ## Projektissa käytetyt teknologiat  
 
