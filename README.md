@@ -13,7 +13,7 @@ Emme määritelleet projektissa erikseen tarkkoja rooleja, vaan projektissa kaik
 
 Projektissa käytetään paljon JavaScriptiä, Reactia ja MySQL-tietokantaa. 
 
-Nettisivuston ulkoasu ja toiminnallisuus on toteutettu React-kirjaston avulla. React on JavaScript-kirjasto, jonka avulla voidaan luoda interaktiivisia käyttöliittymiä. Reactin avulla luodut käyttöliittymät ovat erittäin suorituskykyisiä ja ne päivittyvät reaaliajassa käyttäjän toimien +mukaisesti. 
+Nettisivuston ulkoasu ja toiminnallisuus on toteutettu React-kirjaston avulla. React on JavaScript-kirjasto, jonka avulla voidaan luoda interaktiivisia käyttöliittymiä. Reactin avulla luodut käyttöliittymät ovat erittäin suorituskykyisiä ja ne päivittyvät reaaliajassa käyttäjän toimien mukaisesti. 
 
 REST-API on toteutettu JavaScriptillä. REST eli Representational State Transfer on rajapinta, jonka avulla sovelluksen eri osat voivat vuorovaikuttaa toistensa kanssa. JavaScript on yleisesti käytetty ohjelmointikieli, jolla voidaan toteuttaa sekä frontend- että backend-toiminnallisuuksia. JavaScriptin avulla toteutettu REST-API tarjoaa rajapinnan sovelluksen tietokannan, MySQL:n kanssa vuorovaikutukseen. 
 
